@@ -3,7 +3,7 @@
  * @Date: 2022-11-05 10:51:34
  * @Description: Coding something
  * @LastEditors: chenzhongsheng
- * @LastEditTime: 2022-11-12 15:07:03
+ * @LastEditTime: 2022-11-12 17:39:28
 -->
 ## 1. Alins-style 概述
 
@@ -27,6 +27,7 @@ style函数声明如下
 interface IStyleConstructor extends IStyleAtoms{
     (json: TStyleJsonValue): IStyleBuilder;
     (ts: TemplateStringsArray, ...reactions: TReactionItem[]): IStyleBuilder;
+    (item: IReactBuilder): IStyleBuilder;
     (style: string): IStyleBuilder;
 }
 ```

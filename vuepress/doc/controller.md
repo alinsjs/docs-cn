@@ -3,7 +3,7 @@
  * @Date: 2022-11-05 10:51:23
  * @Description: Coding something
  * @LastEditors: chenzhongsheng
- * @LastEditTime: 2022-11-12 14:35:01
+ * @LastEditTime: 2022-11-12 17:16:55
 -->
 
 ## 1. 控制器概述
@@ -114,7 +114,7 @@ div(
         .case(18)('I am not a adult age only 18')
         .case(19)($`I am not a adult age = ${age}`)
         .default('/h3:I am not a adult age more then 19')
-        // >  注：此处可以改变dom元素的标签
+        // 注：此处可以改变dom元素的标签
         // default 分支非必须
 ).mount();
 ```
