@@ -32,7 +32,7 @@ module.exports = {
     },
     description: 'Alins - All-in-JS Web FrameWork', // 描述
     keywords: 'alins,all-in-js,css-in-js,web-framework',
-    dest: './docs-cn/', // 基本url
+    dest: './docs/', // 打包地址
     base: '/docs-cn/', // gh-pages分支这里需要改成 / 因为 cnchar.js.org的配置
     // 注入到当前页面的 HTML <head> 中的标签
     head: [
