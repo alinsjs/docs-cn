@@ -14,7 +14,7 @@ window.jsboxCode = {
     useDefaultUI: true,
     clearWhenReRun: true,
     code: /* javascript */`const {
-    button, comp, prop, click, $, input, span, br
+    button, comp, prop, click, $, input, span, dom
 } = Alins;
 
 function Count () {
@@ -22,7 +22,7 @@ function Count () {
     return [
         span('input count'),
         input.model(count, 'number'),
-        br(),
+        dom('br')(),
         comp(CountProps)(prop({value: count})),
         button('add', click(() => {count.value++;})),
     ];
