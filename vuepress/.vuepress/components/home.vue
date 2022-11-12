@@ -3,23 +3,23 @@
         <div class='title'>
             <img src='https://shiyix.cn/alins.png' alt=''>
         </div>
-        <div class='desc'><span>Al</span>l-<span>in</span>-j<span>s</span> Web UI <span class='sub-desc'>Framework</span></div>
+        <div class='desc'><span>Al</span>l-<span>in</span>-j<span>s</span> Web UI <span class='sub-desc'>框架</span></div>
         
         <div class='start-w'>
-            <el-button type='primary' @click='start'>Get Started <i class='ei-location-arrow'></i></el-button>
-            <el-button type='primary' @click='run'>Playground <i class='ei-cube-alt'></i></el-button>
-            <el-button type='primary' @click='install'>Install <i class='ei-hand-up'></i></el-button>
+            <el-button type='primary' @click='start'>开始 <i class='ei-location-arrow'></i></el-button>
+            <el-button type='primary' @click='run'>试验场 <i class='ei-cube-alt'></i></el-button>
+            <el-button type='primary' @click='install'>安装 <i class='ei-hand-up'></i></el-button>
         </div>
         <div class='feature-w'>
             <div class='f-i'>
-                <a style='font-weight: normal;' href='/cnchar/guide/intro.html#_2-%E5%8A%9F%E8%83%BD'><div class='f-t'><i class='ei-rocket'></i>Reactive</div></a>
-                <div class='f-des'>Reactive Data</div>
+                <a style='font-weight: normal;' href='/cnchar/guide/intro.html#_2-%E5%8A%9F%E8%83%BD'><div class='f-t'><i class='ei-rocket'></i>响应式</div></a>
+                <div class='f-des'>响应式数据</div>
                 <div class='f-des'>Computed/Watch</div>
-                <div class='f-des'>Components</div>
-                <div class='f-des'>No v-dom</div>
+                <div class='f-des'>组件化</div>
+                <div class='f-des'>无v-dom</div>
             </div>
             <div class='f-i'>
-                <div class='f-t'><i class='ei-cogs'></i>Controllers</div>
+                <div class='f-t'><i class='ei-cogs'></i>控制器</div>
                 <div class='f-des'>For</div>
                 <div class='f-des'>If/Show</div>
                 <div class='f-des'>Switch</div>
@@ -27,10 +27,10 @@
             </div>
             <div class='f-i'>
                 <div class='f-t'><i class='ei-paint-brush'></i>CSS In JS</div>
-                <div class='f-des'>Reactive Css</div>
-                <div class='f-des'>Reactive Style</div>
-                <div class='f-des'>Atom Style</div>
-                <div class='f-des'>Style Compose</div>
+                <div class='f-des'>响应式Css</div>
+                <div class='f-des'>响应式样式</div>
+                <div class='f-des'>原子样式</div>
+                <div class='f-des'>组合式样式</div>
             </div>
         </div>
         <div class='copy-right'>MIT Licensed | Copyright © 2022 - present <a href='https://www.github.com/theajack' target='view_window'>theajack</a></div>
@@ -59,13 +59,13 @@
         },
         methods: {
             start () {
-                window.location.href = '/docs/guide/intro.html';
+                window.location.href = '/docs-cn/guide/intro.html';
             },
             run () {
                 initJSBox().openSample('todo-list');
             },
             install () {
-                window.location.href = '/docs/guide/install.html';
+                window.location.href = '/docs-cn/guide/install.html';
             },
         },
     };

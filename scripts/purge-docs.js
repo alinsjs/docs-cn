@@ -9,6 +9,6 @@ const https = require('https');
 
 console.log('Purge docs CDN...');
 
-https.get('https://purge.jsdelivr.net/gh/alinsjs/docs@gh-pages', () => {
+https.get('https://purge.jsdelivr.net/gh/alinsjs/docs-cn@gh-pages', () => {
     
 });

@@ -3,24 +3,28 @@
  * @Date: 2022-11-03 09:30:54
  * @Description: Coding something
  * @LastEditors: chenzhongsheng
- * @LastEditTime: 2022-11-12 14:09:27
+ * @LastEditTime: 2022-11-12 15:51:30
 -->
+## v0.0.12
+
+1. feat: 修复 组件 + show同时使用时初始化渲染问题 [done]
+
 ## v0.0.11
 
-feat: comp 科里化 comp(Hello)() [done]
-feat: click.stop 简化写法 [done]
-feat: atomStyle 新增 join 方法 [done]
-feat: 声明提示优化 TType & {[prop: string]: any;} [done]
-feat: 通过重载支持string和枚举共存 [done]
-feat: model 支持通过识别 type=number来增加number修饰符 [done]
-fix: 文本中 . [] # / 不显示 : / [] 字符串冲突问题 [done] 使用text方法
-fix: alins-utils ts 声明文件问题 [done]
-fix: subscribe return value; [done]
-fix: 事件声明 不起作用 [done]
-del: splitTwoPart 函数重复 [done]
-fix: 修复兼容属性重复补全问题 [done]
-fix: style 多数据绑定中绑定报错的问题 [done]
-fix: 修复对象类型和computed组合使用时 闭包对象数值不更新问题 [done]
+1. feat: comp 科里化 comp(Hello)() [done]
+2. feat: click.stop 简化写法 [done]
+3. feat: atomStyle 新增 join 方法 [done]
+4. feat: 声明提示优化 TType & {[prop: string]: any;} [done]
+5. feat: 通过重载支持string和枚举共存 [done]
+6. feat: model 支持通过识别 type=number来增加number修饰符 [done]
+7. fix: 文本中 . [] # / 不显示 : / [] 字符串冲突问题 [done] 使用text方法
+8. fix: alins-utils ts 声明文件问题 [done]
+9. fix: subscribe return value; [done]
+10. fix: 事件声明 不起作用 [done]
+11. del: splitTwoPart 函数重复 [done]
+12. fix: 修复兼容属性重复补全问题 [done]
+13. fix: style 多数据绑定中绑定报错的问题 [done]
+14. fix: 修复对象类型和computed组合使用时 闭包对象数值不更新问题 [done]
 
 ## 0.0.10 
 

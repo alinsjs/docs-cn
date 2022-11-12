@@ -9,8 +9,8 @@ module.exports = {
         if (NODE_ENV === 'production') {
             return {
                 output: {
-                    publicPath: 'https://cdn.jsdelivr.net/gh/alinsjs/docs@gh-pages/'
-                    // publicPath: '/docs/' // debug
+                    publicPath: 'https://cdn.jsdelivr.net/gh/alinsjs/docs-cn@gh-pages/'
+                    // publicPath: '/docs-cn/' // debug
                 },
                 resolve: {
                     // 配置路径别名
@@ -32,16 +32,16 @@ module.exports = {
     },
     description: 'Alins - All-in-JS Web FrameWork', // 描述
     keywords: 'alins,all-in-js,css-in-js,web-framework',
-    dest: './docs/', // 基本url
-    base: '/docs/', // gh-pages分支这里需要改成 / 因为 cnchar.js.org的配置
+    dest: './docs-cn/', // 基本url
+    base: '/docs-cn/', // gh-pages分支这里需要改成 / 因为 cnchar.js.org的配置
     // 注入到当前页面的 HTML <head> 中的标签
     head: [
         ['link', {rel: 'icon', href: 'https://shiyix.cn/alins.ico'}], // 增加一个自定义的 favicon
-        // ['script', {src: `https://cdn.jsdelivr.net/npm/alins@${version}`}],
-        // ['script', {src: `https://cdn.jsdelivr.net/npm/alins-style@${version}`}],
+        ['script', {src: `https://cdn.jsdelivr.net/npm/alins@${version}`}],
+        ['script', {src: `https://cdn.jsdelivr.net/npm/alins-style@${version}`}],
         // dev use
-        ['script', {src: `/alins.min.js`}],
-        ['script', {src: `/alins-style.min.js`}],
+        // ['script', {src: `/alins.min.js`}],
+        // ['script', {src: `/alins-style.min.js`}],
     ],
     // dest: './dist', //打包位置
     port: 6868, // 端口号
@@ -62,7 +62,7 @@ module.exports = {
             {text: '主页', link: '/'}, // 内部链接 以docs为根目录
             // {text: '捐赠', link: '/guide/donate'},
             // {text: 'GitHub', link: 'https://www.github.com/alinsjs/alins'},
-            
+            {text: 'English', link: 'https://alinsjs.github.io/docs'},
             {
                 text: '起步',
                 items: [
@@ -90,8 +90,8 @@ module.exports = {
                 text: 'GitHub',
                 items: [
                     {text: 'Alins', link: 'https://www.github.com/alinsjs/alins'},
-                    {text: 'Docs', link: 'https://www.github.com/alinsjs/docs'},
-                    {text: 'Author', link: 'https://www.github.com/theajack'}, // 外部链接
+                    {text: '文档', link: 'https://www.github.com/alinsjs/docs-cn'},
+                    {text: '作者', link: 'https://www.github.com/theajack'}, // 外部链接
                     // {text: 'Gitee地址', link: 'http://www.gitee.com/theajack'},
                     // {
                     //     text: 'CSDN账号',
@@ -147,7 +147,7 @@ module.exports = {
             ],
         },
         sidebarDepth: 1, // 将同时提取markdown中h2，显示在侧边栏上
-        lastUpdated: 'Last updated', // 文档更新时间：每个文件git最后提交的时间
+        lastUpdated: '文档更新时间', // 文档更新时间：每个文件git最后提交的时间
     },
 
     markdown: {

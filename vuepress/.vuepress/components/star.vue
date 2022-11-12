@@ -3,7 +3,7 @@
          @click='starGithub'>
         <div class='word glitch'>
             <div class='flash is-off'>
-                <span class='text'>给个star!</span>
+                <span class='text'>前往GitHub!</span>
             </div>
         </div>
     </div>
