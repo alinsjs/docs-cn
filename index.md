@@ -1,25 +1,42 @@
 ---
 # https://vitepress.dev/reference/default-theme-home-page
 layout: home
-
+# 化繁为简 极致纯粹
 hero:
-  name: "Alins Docs"
-  text: "The most elegant and concise WebUI framework"
-  tagline: My great project tagline
+  name: Alins
+  text: Less is More
+  tagline: The purest and most elegant web UI framework
+  image:
+    src: /alins.png
+    alt: Alins
   actions:
     - theme: brand
-      text: Markdown Examples
+      text: Get Started
       link: /markdown-examples
     - theme: alt
-      text: API Examples
-      link: /api-examples
-
+      text: Why Alins?
+      link: /why-alins
+    - theme: alt
+      text: View on GitHub
+      link: https://github.com/alinsjs/alins
 features:
-  - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+  - icon: 💡
+    title: 最纯粹的开发体验
+    details: 秉持0-API的开发理念，尽可能降低开发者使用的心智负担
+  - icon: 🛠️
+    title: 高度响应式
+    details: 细粒度的响应式支持，让一切皆可响应，同时不引入额外的响应式API
+  - icon: ⚡️
+    title: 不俗的性能
+    details: 未采用vdom，数据的变更直接最细粒度更新到dom，带来不俗的性能
+  - icon: 📦
+    title: 完善的基础设置
+    details: 支持所有主流打包工具使用，配套有状态管理、路由、UI工具库
+  - icon: 🔑
+    title: 友好的类型支持
+    details: 完全采用TS开发，具有非常友好的类型支持.
+  - icon: 🔩
+    title: 自定义渲染器
+    details: 支持自定义渲染器实现跨平台功能。
 ---
 
