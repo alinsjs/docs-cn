@@ -21,14 +21,21 @@ export default defineConfig({
     ['meta', { name: 'twitter:site', content: '@alins_js' }],
     ['meta', { name: 'theme-color', content: '#646cff' }],
     [
-      'script',
-      {
-        src: 'https://cdn.usefathom.com/script.js',
-        'data-site': 'CBDFBSLI',
-        'data-spa': 'auto',
-        defer: '',
-      },
+      // 'script', { src: 'https://cdn.jsdelivr.net/npm/alins-compiler-web'},
+      'script', { src: '/alins-compiler-web.iife.min.js'},
     ],
+    // ['link', { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/gh/theajack/easy-icon/dist/easy-icon.css' }],
+    ['link', { rel: 'stylesheet', href: '/easy-icon.offline.css' }],
+    
+    // [
+    //   'script',
+    //   {
+    //     src: 'https://cdn.usefathom.com/script.js',
+    //     'data-site': 'CBDFBSLI',
+    //     'data-spa': 'auto',
+    //     defer: '',
+    //   },
+    // ],
   ],
   locales: {
     root: { label: '简体中文' },
@@ -40,7 +47,7 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: '主页', link: '/' },
-      { text: '指南', link: '/guide/' },
+      { text: '指南', link: '/guide/intro' },
       { text: 'API', link: '/api' },
       { text: '演练场', link: '/playground' },
       { text: '生态', link: '/ecosystem' },
@@ -51,11 +58,19 @@ export default defineConfig({
     sidebar: {
       '/guide/': [
         {
-          text: '指南',
+          text: '开始',
           items: [
             {
-              text: 'Why Vite',
-              link: '/guide/why',
+              text: '简介',
+              link: '/guide/intro',
+            },
+            {
+              text: '对比',
+              link: '/guide/compare',
+            },
+            {
+              text: '快速上手',
+              link: '/guide/quick-start',
             },
           ]
         }
