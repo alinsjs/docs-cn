@@ -5,7 +5,7 @@ layout: home
 hero:
   name: Alins
   text: 化繁为简
-  tagline: 极致纯粹优雅 Web UI 框架
+  tagline: 极致纯粹优雅的 Web UI 框架
   image:
     src: /alins.png
     alt: Alins
