@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import eveit from 'eveit'
 import {computed, ref} from 'vue';
-import { compressToEncodedURIComponent } from 'lz-string';
+import pkg from 'lz-string';
+const { compressToEncodedURIComponent } = pkg;
 
 let nameRef = ref('');
 let codeRef = ref('');
@@ -24,7 +25,7 @@ let src = computed(() => {
         return ''
     }
     const search = codeRef.value !== 'PLAYGROUND' ? `?name=${nameRef.value}&code=${codeRef.value}`: '';
-    return `http://localhost:5174/${search}`;
+    return `https://alinsjs.github.io/playground/${search}`;
 });
 
 function openStandalone(){

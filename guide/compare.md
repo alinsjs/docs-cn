@@ -1,10 +1,18 @@
 # 对比
 
-Alins 秉持0Api的开发理念，采用jsx描述ui，在可以拥有强大的响应式能力的同时，又不需要引入任何额外的api，可以极大的提升开发者的开发效率，降低代码的理解成本。
+Alins 秉持0-Api、Less-Is-More的开发理念，采用jsx描述ui，在可以拥有强大的响应式能力的同时，又不需要引入任何额外的api，可以极大的提升开发者的开发效率，降低代码的理解成本。
 
 同时Alins也具有极小的运行时体积和打包体积，并且具有不俗的性能。
 
 我们从以下几个方面与主流框架做一下对比
+
+## [js-framework-benchmark](https://github.com/krausest/js-framework-benchmark) 数据
+
+<ViewImg/>
+
+![](https://shiyix.cn/images/alins/performance.jpg)
+
+注：分数越低表示性能越好
 
 ## 源码与打包产物
 
@@ -128,6 +136,9 @@ ReactDOM.render( /*#__PURE__*/_jsx(Main, {}), document.getElementById('app'));
 | 源码体积     | 90byte | 281byte | 302byte |
 | 编译产物体积  | 140byte | 620byte | 435byte |
 | 运行时体积   |   26.6kb    | 474kb | 139kb |
+| 体积评分   |   1.24    | 2.74 | 1.52 |
+| 运行时性能   |   1.36    | 1.45 | 1.54 |
+| 内存占用评分   |   2.77    | 3.30 | 3.28 |
 
 ::: tip
 该比较仅针对当前计数器示例，仅作参考

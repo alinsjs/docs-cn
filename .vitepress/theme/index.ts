@@ -6,6 +6,7 @@ import hljs from 'highlight.js/lib/core';
 import javascript from 'highlight.js/lib/languages/javascript';// Then register the languages you need
 import CodeBox from './component/code-box.vue'
 import CodeCompare from './component/code-compare.vue'
+import ViewImg from './component/view-img.vue'
 import Playground from './component/playground.vue'
 // import HomeSponsors from './components/HomeSponsors.vue'
 // import AsideSponsors from './components/AsideSponsors.vue'
@@ -28,5 +29,6 @@ export default {
   enhanceApp({ app }) {
     app.component('CodeBox', CodeBox);
     app.component('CodeCompare', CodeCompare);
+    app.component('ViewImg', ViewImg);
   },
 }

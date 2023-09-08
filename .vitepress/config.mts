@@ -6,10 +6,14 @@
 import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
+
+const isProd = true;
+
 export default defineConfig({
   title: "Alins Docs",
   description: "The most elegant and concise WebUI framework",
-
+  base: isProd ? '/docs-cn/': '/',
+  outDir: './docs',
   head: [
     ['link', { rel: 'icon', type: 'image/svg+xml', href: 'https://shiyix.cn/images/alins.ico' }],
     ['meta', { property: 'og:type', content: 'website' }],
@@ -21,11 +25,16 @@ export default defineConfig({
     ['meta', { name: 'twitter:site', content: '@alins_js' }],
     ['meta', { name: 'theme-color', content: '#646cff' }],
     [
-      // 'script', { src: 'https://cdn.jsdelivr.net/npm/alins-compiler-web'},
-      'script', { src: '/alins-compiler-web.iife.min.js'},
+      // 'script', { src: },
+      'script', { 
+        src: isProd ? 'https://cdn.jsdelivr.net/npm/alins-compiler-web'
+          : `/alins-compiler-web.iife.min.js`
+      },
     ],
-    // ['link', { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/gh/theajack/easy-icon/dist/easy-icon.css' }],
-    ['link', { rel: 'stylesheet', href: '/easy-icon.offline.css' }],
+    ['link', { rel: 'stylesheet', href: isProd 
+      ? 'https://cdn.jsdelivr.net/gh/theajack/easy-icon/dist/easy-icon.css'
+      : `/easy-icon.offline.css` 
+    }],
     
     // [
     //   'script',
@@ -48,11 +57,10 @@ export default defineConfig({
     nav: [
       { text: '主页', link: '/' },
       { text: '指南', link: '/guide/intro' },
-      { text: 'API', link: '/api' },
-      { text: '演练场', link: '/playground' },
-      { text: '生态', link: '/ecosystem' },
-      { text: '关于', link: '/about' },
-      { text: 'alins', link: '/alins' },
+      { text: 'API', link: '/api/' },
+      { text: '生态', link: '/ecosystem/plugin' },
+      { text: '演练场', link: 'https://alinsjs.github.io/playground' },
+      { text: 'Github', link: 'https://github.com/alinsjs/alins' },
     ],
 
     sidebar: {
@@ -80,27 +88,26 @@ export default defineConfig({
           text: 'API',
           items: [
             {
-              text: 'Why Vite',
-              link: '/guide/why',
+              text: '概述',
+              link: '/api/index',
             },
           ]
         }
       ],
       '/ecosystem/': [
         {
-          text: 'Guide',
+          text: '周边生态',
           items: [
             {
-              text: 'Why Vite',
-              link: '/guide/why',
+              text: '插件',
+              link: '/ecosystem/plugin',
             },
           ]
         }
       ]
     },
-
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
+      { icon: 'github', link: 'https://github.com/alinsjs/alins' }
     ],
     footer: {
       message: 'Alins 2022-present',

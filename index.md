@@ -12,10 +12,10 @@ hero:
   actions:
     - theme: brand
       text: Get Started
-      link: /markdown-examples
+      link: /guide/intro
     - theme: alt
       text: Why Alins?
-      link: /why-alins
+      link: /guide/compare
     - theme: alt
       text: View on GitHub
       link: https://github.com/alinsjs/alins

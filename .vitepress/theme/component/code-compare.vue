@@ -101,6 +101,9 @@ function toggleFullScreen(){
         z-index: 10000;
         width: 100%;
         height: 100%;
+        .code-compare-container{
+            max-height: none;
+        }
     }
 }
 .code-compare-container{
