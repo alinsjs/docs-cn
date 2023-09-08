@@ -4,20 +4,20 @@ layout: home
 # 化繁为简 极致纯粹
 hero:
   name: Alins
-  text: Less is More
-  tagline: The purest and most elegant web UI framework
+  text: 化繁为简
+  tagline: 极致纯粹优雅 Web UI 框架
   image:
     src: /alins.png
     alt: Alins
   actions:
     - theme: brand
-      text: Get Started
+      text: 快速开始
       link: /guide/intro
     - theme: alt
-      text: Why Alins?
+      text: 对比
       link: /guide/compare
     - theme: alt
-      text: View on GitHub
+      text: 前往GitHub
       link: https://github.com/alinsjs/alins
 features:
   - icon: 💡

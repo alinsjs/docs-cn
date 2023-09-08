@@ -55,7 +55,9 @@ onMounted(async ()=>{
 
     codeRef.value.appendChild(codeEle);
     // @ts-ignore
-    const resultCode = await compileCode(code.value);
+    const compileCodeResult = await compileCode(code.value);
+
+    const resultCode = compileCodeResult.replace(/import *\{(.*?)\} *from *['"]alins['"]/g, 'const {$1} = window.Alins');
 
     const fn = new Function(resultCode
         .replace('#App', `#${id}`).replace(/\.getElementById\(['"]App['"]\)/i, `.getElementById('${id}')`));
@@ -69,7 +71,7 @@ onMounted(async ()=>{
     fn();
 
     const highlightedCode = hljs.highlight(
-        resultCode.replace('const _$$ = window.Alins._$$;', 'import {_$$$$} from "alins";'),
+        compileCodeResult,
         { language: 'javascript' }
     );
     compileRef.value.innerHTML = highlightedCode.value;
