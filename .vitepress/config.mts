@@ -7,7 +7,7 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 
-const isProd = true;
+const isProd = false;
 
 export default defineConfig({
   title: "Alins Docs",
@@ -57,10 +57,8 @@ export default defineConfig({
     nav: [
       { text: '主页', link: '/' },
       { text: '指南', link: '/guide/intro' },
-      { text: 'API', link: '/api/' },
       { text: '生态', link: '/ecosystem/plugin' },
       { text: '演练场', link: 'https://alinsjs.github.io/playground' },
-      { text: 'Github', link: 'https://github.com/alinsjs/alins' },
     ],
 
     sidebar: {
@@ -80,16 +78,71 @@ export default defineConfig({
               text: '快速上手',
               link: '/guide/quick-start',
             },
+            {
+              text: '概念',
+              link: '/guide/overview',
+            },
           ]
-        }
-      ],
-      '/api/': [
+        },
         {
-          text: 'API',
+          text: '使用手册',
           items: [
             {
-              text: '概述',
-              link: '/api/index',
+              text: 'JSX扩展',
+              link: '/guide/jsx',
+            },
+            {
+              text: 'class',
+              link: '/guide/class',
+            },
+            {
+              text: 'style',
+              link: '/guide/style',
+            },
+            {
+              text: '生命周期',
+              link: '/guide/lifecycle',
+            },
+            {
+              text: '响应式数据',
+              link: '/guide/reactive',
+            },
+            {
+              text: '计算数据',
+              link: '/guide/computed',
+            },
+            {
+              text: '数据绑定',
+              link: '/guide/binding',
+            },
+            {
+              text: '组件',
+              link: '/guide/component',
+            },
+            {
+              text: '单向数据流',
+              link: '/guide/flow',
+            },
+            {
+              text: '逻辑块',
+              link: '/guide/logic',
+            },
+            {
+              text: '编译规则',
+              link: '/guide/rule',
+            },
+            // ! 暂时不暴露api需要考虑编译器兼容
+            // {
+            //   text: 'API',
+            //   link: '/guide/api',
+            // },
+            {
+              text: '状态管理',
+              link: '/guide/store',
+            },
+            {
+              text: '自定义渲染器',
+              link: '/guide/render',
             },
           ]
         }
@@ -99,8 +152,20 @@ export default defineConfig({
           text: '周边生态',
           items: [
             {
-              text: '插件',
+              text: '构建工具插件',
               link: '/ecosystem/plugin',
+            },
+            {
+              text: 'Web编译器',
+              link: '/ecosystem/web-compiler',
+            },
+            {
+              text: 'Alins Standalone',
+              link: '/ecosystem/standalone',
+            },
+            {
+              text: '工具库',
+              link: '/ecosystem/lib',
             },
           ]
         }

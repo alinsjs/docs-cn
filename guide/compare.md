@@ -74,9 +74,9 @@ ReactDOM.render(
 <CodeCompare/>
 
 ```js
-import { _$$ } from "alins";
-let count = _$$.r(1);
-_$$.ce("button", {
+import { _$r, _$ce } from "alins";
+let count = _$r(1);
+_$ce("button", {
   onclick: () => count.v++,
   $mount: "#App"
 }, "count is ", count);

@@ -127,3 +127,7 @@ max-width: 124px;
 .VPButton.brand{
     background-color: var(--vp-c-brand);
 }
+
+strong{
+    color: var(--vp-c-brand-light);
+}

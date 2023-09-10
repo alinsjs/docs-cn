@@ -1,10 +1,15 @@
+<!--
+ * @Author: chenzhongsheng
+ * @Date: 2023-09-08 13:17:31
+ * @Description: Coding something
+-->
 # 简介
 
 ## 什么是Alins?
 
 Alins 为 All-in-js 的简写，Alins是一款极致纯粹、简洁、优雅的Web UI框架。秉持0-API、Less is More 的开发理念，旨在帮助开发者摆脱UI框架繁杂的API调用困境，以最直观、最纯粹、最贴近vanillajs的开发方式，开发高性能的响应式Web应用程序，同时具有极小的打包体积。
 
-您只需要了解jsx的书写规则（类似html的语法）便可以没有任何阻碍的开发 alins web应用。下面是一个最基本的计数器示例：
+您只需要了解jsx的书写规则（类似html的语法）便可以几乎没有任何阻碍的开发 alins web应用。下面是一个最基本的计数器示例：
 
 <CodeBox />
 
