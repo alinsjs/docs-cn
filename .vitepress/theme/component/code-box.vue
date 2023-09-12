@@ -59,21 +59,20 @@ onMounted(async ()=>{
     // @ts-ignore
     const compileCodeResult = await compileCode(code.value);
 
-    const resultCode = compileCodeResult.replace(/import *\{(.*?)\} *from *['"]alins['"]/g, 'const {$1} = window.Alins');
-
-
     const mockConsole = {
         log(...args: any[]){logs.value.push(args.map((item)=>{
             return typeof item === 'object' ? JSON.stringify(item): item
         }).join(' '));},
         clear(){logs.value = []},
     }
+    const resultCode = compileCodeResult.replace(/import *\{(.*?)\} *from *['"]alins['"]/g, 'const {$1} = window.Alins');
 
     const fn = new Function('console', resultCode.replace('#App', `#${id}`).replace(/\.getElementById\(['"]App['"]\)/i, `.getElementById('${id}')`));
 
     runCode = ()=>{
         document.getElementById(id)!.innerHTML = '';
         fn(mockConsole);
+        mockConsole.clear();
         setInfo('刷新成功!');
     }
 

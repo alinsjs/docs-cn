@@ -5,7 +5,7 @@
  */
 
 export async function compileCode(code: string){
-    return (await getCompiler())(code, { useImport: true });
+    return (await getCompiler())(code, { useImport: true, ts: true });
 }
 
 function getCompiler(): Promise<(code:string, opt: any)=>string> {

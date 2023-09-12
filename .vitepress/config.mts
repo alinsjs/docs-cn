@@ -9,8 +9,10 @@ import { defineConfig } from 'vitepress'
 
 const isProd = false;
 
+const version = '0.0.29'
+
 export default defineConfig({
-  title: "Alins Docs",
+  title: `Alins Docs(v${version})`,
   description: "The most elegant and concise WebUI framework",
   base: isProd ? '/docs-cn/': '/',
   outDir: './docs',
@@ -25,9 +27,9 @@ export default defineConfig({
     ['meta', { name: 'twitter:site', content: '@alins_js' }],
     ['meta', { name: 'theme-color', content: '#646cff' }],
     [
-      // 'script', { src: },
+      // 'script', {src: `https://cdn.jsdelivr.net/npm/alins-compiler-web@${version}`}
       'script', { 
-        src: isProd ? 'https://cdn.jsdelivr.net/npm/alins-compiler-web'
+        src: isProd ? `https://cdn.jsdelivr.net/npm/alins-compiler-web@${version}`
           : `/alins-compiler-web.iife.min.js`
       },
     ],
@@ -52,7 +54,7 @@ export default defineConfig({
   },
   themeConfig: {
     logo: 'https://shiyix.cn/images/alins.png',
-    siteTitle: 'Alins',
+    siteTitle: `Alins`,
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: '主页', link: '/' },
@@ -80,7 +82,7 @@ export default defineConfig({
             },
             {
               text: '概念',
-              link: '/guide/overview',
+              link: '/guide/concept',
             },
           ]
         },
@@ -145,7 +147,20 @@ export default defineConfig({
               link: '/guide/render',
             },
           ]
-        }
+        },
+        {
+          text: '附录',
+          items: [
+            {
+              text: '查询手册',
+              link: '/guide/quick',
+            },
+            {
+              text: '工具链接',
+              link: '/guide/libs',
+            },
+          ]
+        },
       ],
       '/ecosystem/': [
         {

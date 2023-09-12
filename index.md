@@ -27,8 +27,8 @@ features:
     title: 高度响应式
     details: 细粒度的响应式支持，让一切皆可响应，同时不引入额外的响应式API
   - icon: ⚡️
-    title: 不俗的性能
-    details: 未采用vdom，数据的变更直接最细粒度更新到dom，带来不俗的性能
+    title: 极致的性能
+    details: 未采用vdom，数据的变更直接最细粒度更新到dom，带来极致的性能体验
   - icon: 📦
     title: 完善的基础设置
     details: 支持所有主流打包工具使用，配套有状态管理、路由、UI工具库

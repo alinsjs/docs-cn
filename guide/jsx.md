@@ -5,10 +5,6 @@
 -->
 # JSX扩展
 
-[JSX](https://react.dev/learn/writing-markup-with-jsx#jsx-putting-markup-into-javascript)是一种基于JavaScript的语法扩展，与HTML十分相似，首先被用在 React 中来描述用户界面。Alins也采用JSX来描述UI。
-
-在本文中，我们不对JSX做过多的介绍。只是介绍Alins中与React中的JSX差异之处。如果您不了解JSX，也不必担心，只需要对HTML有一定的了解也可以无阻碍的学习接下来的教程，如果需要对JSX有更进一步的了解，也可以移步至[React JSX](https://react.dev/learn/writing-markup-with-jsx#jsx-putting-markup-into-javascript)
-
 Alins 采用 JSX描述UI，但是在JSX的基础上做了一些扩展，以使其可以实现更加强大的能力。本章节目的就是介绍一些Alins中对JSX做的一些扩展
 
 ## 1.JSX返回值
@@ -77,6 +73,8 @@ const parent = <div $mount='#App'>Parent</div>;
 
 在下面的教程中，为了代码的简练，我们将会采用 `$$App` 的写法来挂载元素。
 
+注：`$$body` 是一个特殊的属性，表示将元素挂载到 document.body 上。
+
 ## 4.JSX表达式
 
 JSX表达式是使用花括号包裹的JS代码，用来嵌入JS逻辑到UI中，为UI提供了极高的灵活性和扩展性
@@ -91,6 +89,8 @@ const msg = 'World';
 ```
 
 ## 5.JSX事件
+
+### 5.1 基础使用
 
 在 Alins JSX中，我们使用HTML一样的事件名称，同时具有一样的event对象
 
@@ -110,7 +110,7 @@ function logClient(event){
 >Click Me</button>;
 ```
 
-### $e对象
+### 5.2 $e对象
 
 使用表达式的作为事件函数的时候，可以使用 `$e` 变量来使用 event 对象，如下：
 
@@ -120,6 +120,141 @@ function logClient(event){
 <button $$App
     onclick={console.log('ClientX = ', $e.clientX)}
 >Click Me</button>;
+```
+
+### 5.3 事件装饰器
+
+事件装饰器用于修饰事件的行为，有以下几种：`prevent、stop、capture、once、self、pure`。
+
+#### prevent
+
+prevent 用于阻止事件的默认行为，内部调用了 event.preventDefault
+
+<CodeBox/>
+
+```jsx
+function click(){
+    console.log('Prevent checkbox checked!');
+}
+<div $$App>
+    Normal: <input type='checkbox'/><br/>
+    Prevent And Alert: <input onclick:prevent={click} type='checkbox'/><br/>
+    Only Prevent: <input onclick:prevent type='checkbox'/>
+</div>
+```
+
+#### stop
+
+stop 用于阻止事件冒泡，内部调用了 event.stopPropagation
+
+<CodeBox/>
+
+```jsx
+function click(from: string){
+    console.log(`Click from ${from}!`);
+}
+<div $$App>
+    <div onclick={click('parent')}>
+        Normal: 
+        <button onclick={click('child')}>Click Me!</button>
+    </div>
+    <div onclick={click('parent')}>
+        StopPropagation With Alert: 
+        <button onclick:stop={click('child')}>Click Me!</button>
+    </div>
+    <div onclick={click('parent')}>
+        Only StopPropagation: 
+        <button onclick:stop>Click Me!</button>
+    </div>
+</div>
+```
+
+#### capture
+
+capture 用于开启事件捕获，当携带时，会将事件的 useCapture 传入 true
+
+<CodeBox/>
+
+```jsx
+function click(from: string){
+    console.log(`Click from ${from}!`);
+}
+<div $$App>
+    <div onclick={click('parent')}>
+        Normal: <button onclick={click('child')}>Click Me!</button>
+    </div>
+    <div onclick:capture={click('parent')}>
+        With Capture: <button onclick:capture={click('child')}>Click Me!</button>
+    </div>
+</div>
+```
+
+#### once
+
+once 表示事件仅仅触发一次
+
+<CodeBox/>
+
+```jsx
+function click(){
+    console.log('Clicked, try again!');
+}
+<div $$App>
+    <div>
+        Normal: <button onclick={click}>Click Me!</button>
+    </div>
+    <div>
+        Only Once: <button onclick:once={click}>Click Me!</button>
+    </div>
+</div>
+```
+
+#### self
+
+self 表示仅仅 event.target 为当前dom元素时才触发
+
+<CodeBox/>
+
+```jsx
+function click(from: string){
+    console.log(`Click from ${from}!`);
+}
+<div $$App>
+    <div onclick={click('parent')}>
+        Normal: 
+        <button onclick={click('child')}>Click Me!</button>
+    </div>
+    <div onclick:self={click('parent')}>
+        With Self: 
+        <button onclick={click('child')}>Click Me!</button>
+    </div>
+</div>
+
+```
+
+#### pure
+
+pure 是一个编译时的装饰器，用于保留事件的原始值，不要对其进行编译。
+
+<CodeBox/>
+
+```jsx
+function click(from: string){
+    console.log(`Execute click from ${from}`)
+    // The pure decorator is used to keep event expressions from being compiled
+    return ()=>{
+        console.log(`Click from ${from}!`);
+    }
+}
+<div $$App>
+    <div>
+        Normal [Won't Log Click From]: 
+        <button onclick={click('child1')}>Click Me!</button>
+    </div>
+    <div>
+        With Pure: <button onclick:pure={click('child2')}>Click Me!</button>
+    </div>
+</div>
 ```
 
 ## 6.$ref属性
