@@ -94,6 +94,10 @@ export default defineConfig({
               link: '/guide/jsx',
             },
             {
+              text: '事件',
+              link: '/guide/event',
+            },
+            {
               text: 'class',
               link: '/guide/class',
             },

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {onMounted, ref} from 'vue';
-import {compileCode, download, copy} from '../utils/alins-compiler';
+import {compileCode, download, copy, countCodeSize} from '../utils/alins-compiler';
 import eveit from 'eveit'
 
 import hljs from 'highlight.js/lib/core';
@@ -12,8 +12,10 @@ const compileRef = ref();
 let code = ref('');
 let name = ref('运行结果');
 let info = ref('');
+let codeSize = ref('');
+let compileCodeSize = ref('');
 
-let logs = ref([] as string[]);
+let logs = ref([] as {msg: string, type: 'log'|'warn'}[]);
 
 let showCompileResult = ref(false);
 
@@ -56,14 +58,25 @@ onMounted(async ()=>{
     code.value = codeDom.textContent;
 
     codeRef.value.appendChild(codeEle);
+    codeSize.value = countCodeSize(code.value);
+
     // @ts-ignore
     const compileCodeResult = await compileCode(code.value);
 
+    const pushLog = (args: any[], type: 'log'|'warn' = 'log')=>{
+            logs.value.push({
+                msg: args.map((item)=>{
+                    return typeof item === 'object' ? JSON.stringify(item): item
+                }).join(' '),
+                type,
+            });
+    }
+
     const mockConsole = {
-        log(...args: any[]){logs.value.push(args.map((item)=>{
-            return typeof item === 'object' ? JSON.stringify(item): item
-        }).join(' '));},
+        log(...args: any[]){pushLog(args)},
         clear(){logs.value = []},
+        warn(...args: any[]){pushLog(args, 'warn')},
+        info(...args: any[]){console.info(...args)},
     }
     const resultCode = compileCodeResult.replace(/import *\{(.*?)\} *from *['"]alins['"]/g, 'const {$1} = window.Alins');
 
@@ -82,13 +95,17 @@ onMounted(async ()=>{
         compileCodeResult,
         { language: 'javascript' }
     );
+    compileCodeSize.value = countCodeSize(compileCodeResult);
     compileRef.value.innerHTML = highlightedCode.value;
 })
 </script>
 
 <template>
     <div class="code-block" ref="blockRef">
-        <div ref="codeRef"></div>
+        <div style="position: relative;">
+            <div ref="codeRef"></div>
+            <span class="code-size">{{codeSize}}</span>
+        </div>
         <div class="code-title">
             <span style="font-weight: bold;">{{ name }} 
                 <span @click="showCompileResult=!showCompileResult"
@@ -105,9 +122,12 @@ onMounted(async ()=>{
         <div ref="resultRef" class="result-box" :id="id"></div>
         <div v-show="logs.length > 0" class="result-box console-result">
             <i title='Clear Console' class="ei-times" @click="logs=[]"></i>
-            <div class="console-item" v-for="item in logs">{{ item }}</div>
+            <div :class="'console-item '+item.type" v-for="item in logs">{{ item.msg }}</div>
         </div>
-        <pre v-show="showCompileResult" ref="compileRef" class="result-box compile-result"></pre>
+        <div style="position: relative;" v-show="showCompileResult">
+            <pre ref="compileRef" class="result-box compile-result"></pre>
+            <span class="code-size">{{compileCodeSize}}</span>
+        </div>
     </div>
 </template>
 
@@ -116,6 +136,9 @@ onMounted(async ()=>{
     border-top: 1px solid #333;
     border-bottom: 1px solid #333;
     padding-bottom: 15px;
+    .code-size{
+        right: 5px;
+    }
     .code-title{
         display: flex;
         justify-content: space-between;
@@ -147,11 +170,12 @@ onMounted(async ()=>{
     }
 }
 .result-box{
+    position: relative;
     padding: 15px;
     background-color: #171717;
     overflow: auto;
     color: #eee;
-    button, input, select{
+    button, input, select, textarea{
         margin: 5px;
         padding: 4px 8px;
         background-color: #222;
@@ -179,7 +203,7 @@ onMounted(async ()=>{
     }
     &.console-result{
         position: relative;
-        padding: 5px 15px;;
+        padding: 5px 0px;;
         .ei-times{
             font-size: 18px;
             position: absolute;
@@ -194,11 +218,14 @@ onMounted(async ()=>{
             font-size: 13px;
             line-height: 15px;
             color: #ccc;
-            padding: 3px 0;
+            padding: 3px 15px;
             border-bottom: 1px solid #333;
             word-break: break-all;
             &:last-child{
                 border-color: transparent;
+            }
+            &.warn{
+                background-color: #322b08;
             }
         }
     }
