@@ -81,7 +81,11 @@ function increaseCount(e){
 
 ## 组件与单向数据流
 
-Alins 组件的使用与 JSX 组件基本一致，组件本身是一个返回 JSX对象的函数，组件的第一个参数为属性，第二个参数为组件内的元素，一下是一个组件的基础示例：
+Alins 组件的使用与 JSX 组件基本一致，组件本身是一个返回 JSX对象的函数，所以组件返回的也是原生DOM元素。组件的第一个参数为属性，第二个参数为组件内的元素。
+
+组件内部的代码只会被执行一次，绑定数据的变更只会导致细粒度的元素更新，整个组件不会被重新渲染。
+
+以下是一个组件的基础示例：
 
 <CodeBox/>
 
@@ -108,7 +112,7 @@ Alins遵循单向数据流原则，父组件传入子组件的数据也具有响
 function Component({msg, modifyMsg}, children){
     return <div>
         <div>msg = {msg}</div>
-        <button onclick={msg += '!'}>子组件直接修改msg</button>
+        <button onclick={msg += '!'}>子组件直接修改msg[无效]</button>
         <button onclick={modifyMsg()}>子组件通过方法修改msg</button>
         {children}
     </div>

@@ -34,9 +34,9 @@ features:
     details: 支持所有主流打包工具使用，配套有状态管理、路由、UI工具库
   - icon: 🔑
     title: 友好的类型支持
-    details: 完全采用TS开发，具有非常友好的类型支持.
+    details: 完全采用TS开发，具有非常友好的类型支持
   - icon: 🔩
     title: 自定义渲染器
-    details: 支持自定义渲染器实现跨平台功能。
+    details: 支持自定义渲染器实现跨平台功能
 ---
 

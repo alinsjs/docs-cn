@@ -73,19 +73,19 @@ onMounted(async ()=>{
     }
 
     const mockConsole = {
-        log(...args: any[]){pushLog(args)},
+        log(...args: any[]){pushLog(args);},
         clear(){logs.value = []},
         warn(...args: any[]){pushLog(args, 'warn')},
         info(...args: any[]){console.info(...args)},
     }
     const resultCode = compileCodeResult.replace(/import *\{(.*?)\} *from *['"]alins['"]/g, 'const {$1} = window.Alins');
-
-    const fn = new Function('console', resultCode.replace('#App', `#${id}`).replace(/\.getElementById\(['"]App['"]\)/i, `.getElementById('${id}')`));
+    console.log(resultCode);
+    const fn = new Function('console', resultCode.replace(/#App/g, `#${id}`).replace(/\.getElementById\(['"]App['"]\)/i, `.getElementById('${id}')`));
 
     runCode = ()=>{
+        mockConsole.clear();
         document.getElementById(id)!.innerHTML = '';
         fn(mockConsole);
-        mockConsole.clear();
         setInfo('刷新成功!');
     }
 

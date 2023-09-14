@@ -122,12 +122,8 @@ export default defineConfig({
               link: '/guide/binding',
             },
             {
-              text: '组件',
+              text: '组件与单向数据流',
               link: '/guide/component',
-            },
-            {
-              text: '单向数据流',
-              link: '/guide/flow',
             },
             {
               text: '逻辑块',

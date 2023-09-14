@@ -144,3 +144,22 @@ function logAttributes(e){
     onclick={logAttributes} 
 >Click Me!</button>
 ```
+
+## 8.动态节点
+
+由于Alins本质就是直接操作Dom，所以创建动态节点也非常直观，就是直接挂载JSX元素既可以，举一个例子
+
+<CodeBox/>
+
+```jsx
+let parent, _id = 1;
+function addChild(e){
+    <div $mount={parent}>Dynamic Node {_id++}</div>;
+    // Or use $mount={e.target.parentElement}
+}
+<div $ref={parent} style='border: 1px solid #555' $$App>
+    <button onclick={addChild}>Add Child</button>
+</div>
+```
+
+**注：此处的 _id 变量使用了下划线前缀，用于标识一个静态数据，不然id++会被标识为计算数据从而发生响应式变更**
