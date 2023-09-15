@@ -8,7 +8,78 @@
 
 ## 3. Switch 组件
 
-## 4. switch 语法
+Switch 组件逻辑与js的switch语句差不多，用于根据一个变量的值来选择分则执行。Switch的判断条件使用 data 属性传入，条件分支使用 Case 组件接收，条件的值也是使用 data 属性传入。Default 组件用于处理 Switch 的默认条件分支。
+
+Case 的data属性支持传入数组，表示同时匹配多个值。
+
+<CodeBox/>
+
+```jsx
+function Main () {
+    let count = 0;
+    const add = () => {count++;};
+    return <Switch data={count}>
+        <Case data={[1,2]}>
+            <button onclick={add}>Count is 1 or 2:{count}</button>
+        </Case>
+        <Case data={3}>
+            <button onclick={add}>Count is 3[count=3]</button>
+        </Case>
+        <Case data={4}>
+            <button onclick={add}>Now Count = 4</button>
+        </Case>
+        <Default>
+            <button onclick={add}>Other Count:{count}</button>
+        </Default>
+    </Switch>;
+}
+<Main $$App/>;
+```
+
+同时 Case 组件支持 break 属性，用于表示是否立即跳出 Switch 逻辑。默认值为true。
+
+<CodeBox/>
+
+```jsx
+function Main () {
+    let count = 0;
+    const add = () => {count++;};
+    return <Switch data={count}>
+        <Case data={1} break={false}>
+            <button onclick={add}>Count is 1</button>
+        </Case>
+        <Case data={2}>
+            <button onclick={add}>Count is 1 or 2:{count}</button>
+        </Case>
+        <Default>
+            <button onclick={add}>Other Count:{count}</button>
+        </Default>
+    </Switch>;
+}
+<Main $$App/>;
+```
+
+## 4. switch 语句
+
+Alins 会将js的`switch`语句编译成一个Switch逻辑组件，功能与Switch组件一致
+
+<CodeBox/>
+
+```jsx
+function Main () {
+    let count = 0;
+    const add = () => {count++;};
+    switch (count) {
+        case 1:
+        case 2:
+            return <button onclick={add}>Count is 1 or 2:{count}</button>;
+        case 3: return <button onclick={add}>Count is 3[count=3]</button>;
+        case 4: return <button onclick={add}>Now Count = 4</button>;
+    }
+    return <button onclick={add}>Other Count:{count}</button>;
+}
+<Main $$App/>;
+```
 
 ## 5. For 组件
 
@@ -72,7 +143,7 @@ function mockFetch(){
     return new Promise(resolve => {
         setTimeout(() => {
             resolve({name: 'Bob', age: 10})
-        }, 2000)
+        }, 1000)
     });
 }
 

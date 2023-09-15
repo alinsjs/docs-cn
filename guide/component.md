@@ -108,7 +108,7 @@ function mockFetch(){
     return new Promise(resolve => {
         setTimeout(()=>{
             resolve({name: 'Bob', age: 10})
-        }, 2000)
+        }, 1000)
     });
 }
 
