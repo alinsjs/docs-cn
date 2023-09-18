@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {onMounted, ref} from 'vue';
-import {compileCode, download, copy, countCodeSize} from '../utils/alins-compiler';
+import {compileCode, download, copy, countCodeSize, createIFrameSrc} from '../utils/alins-compiler';
 import eveit from 'eveit'
 
 import hljs from 'highlight.js/lib/core';
@@ -14,8 +14,32 @@ let name = ref('运行结果');
 let info = ref('');
 let codeSize = ref('');
 let compileCodeSize = ref('');
+let iframeSrc = ref('');
+let iframeRef = ref();
+
+const props = defineProps<{
+    iframe?: boolean,
+    height?: number,
+    html?: boolean,
+}>();
 
 let logs = ref([] as {msg: string, type: 'log'|'warn'}[]);
+
+const pushLog = (args: any[], type: 'log'|'warn' = 'log')=>{
+    logs.value.push({
+        msg: args.map((item)=>{
+            return typeof item === 'object' ? JSON.stringify(item): item
+        }).join(' '),
+        type,
+    });
+}
+
+const mockConsole = {
+    log(...args: any[]){pushLog(args);},
+    clear(){logs.value = []},
+    warn(...args: any[]){pushLog(args, 'warn')},
+    info(...args: any[]){console.info(...args)},
+}
 
 let showCompileResult = ref(false);
 
@@ -60,36 +84,45 @@ onMounted(async ()=>{
     codeRef.value.appendChild(codeEle);
     codeSize.value = countCodeSize(code.value);
 
+    let compileCodeResult = '', resultCode = '';
+
+    if(props.html){
+        compileCodeResult = resultCode = code.value
+    } else {
     // @ts-ignore
-    const compileCodeResult = await compileCode(code.value);
-
-    const pushLog = (args: any[], type: 'log'|'warn' = 'log')=>{
-            logs.value.push({
-                msg: args.map((item)=>{
-                    return typeof item === 'object' ? JSON.stringify(item): item
-                }).join(' '),
-                type,
-            });
+        compileCodeResult = await compileCode(code.value);
+        resultCode = compileCodeResult.replace(/import *\{(.*?)\} *from *['"]alins['"]/g, 'const {$1} = window.Alins');
     }
+// console.log(resultCode);
+    const fn = props.iframe ? 
+        null :
+        new Function('console', resultCode.replace(/#App/g, `#${id}`).replace(/\.getElementById\(['"]App['"]\)/i, `.getElementById('${id}')`));
 
-    const mockConsole = {
-        log(...args: any[]){pushLog(args);},
-        clear(){logs.value = []},
-        warn(...args: any[]){pushLog(args, 'warn')},
-        info(...args: any[]){console.info(...args)},
-    }
-    const resultCode = compileCodeResult.replace(/import *\{(.*?)\} *from *['"]alins['"]/g, 'const {$1} = window.Alins');
-    console.log(resultCode);
-    const fn = new Function('console', resultCode.replace(/#App/g, `#${id}`).replace(/\.getElementById\(['"]App['"]\)/i, `.getElementById('${id}')`));
-
-    runCode = ()=>{
+    runCode = () => {
         mockConsole.clear();
-        document.getElementById(id)!.innerHTML = '';
-        fn(mockConsole);
+        if(props.iframe){
+            iframeRef.value.contentWindow?.location.reload();
+        } else {
+            document.getElementById(id)!.innerHTML = '';
+            fn?.(mockConsole);
+        }
         setInfo('刷新成功!');
     }
 
-    fn(mockConsole);
+    if(props.iframe){
+        iframeSrc.value = createIFrameSrc(resultCode, id, props.html);
+        window.addEventListener('message', (e)=>{
+            const data = e.data;
+            if(data.id !== id) return;
+            if(data.type === 'iframe_log'){
+                mockConsole.log(...data.data);
+            }else if(data.type === 'iframe_clear_log'){
+                mockConsole.clear();
+            }
+        });
+    } else {
+        fn?.(mockConsole);
+    }
 
     const highlightedCode = hljs.highlight(
         compileCodeResult,
@@ -113,13 +146,16 @@ onMounted(async ()=>{
             </span>
             <span style="color:#4c4">{{ info }}</span>
             <span class='editor-btns'>
-                <i @click="openInPlayground" title="在试验场中打开" class="ei-code"></i>
+                <i v-show="!props.html" @click="openInPlayground" title="在试验场中打开" class="ei-code"></i>
                 <i @click="copyCode" title="复制代码" class="ei-copy"></i>
                 <i @click="downloadHtml" title='下载示例' class="ei-download-alt"></i>
                 <i @click="runCode" title='刷新结果' class="ei-refresh"></i>
             </span>
         </div>
-        <div ref="resultRef" class="result-box" :id="id"></div>
+        <div v-if="!iframe" ref="resultRef" class="result-box" :id="id"></div>
+        <div v-else class="result-box">
+            <iframe :style="{height: (props.height || 100)+'px' }" ref="iframeRef" :src="iframeSrc" frameborder="0"></iframe>
+        </div>
         <div v-show="logs.length > 0" class="result-box console-result">
             <i title='Clear Console' class="ei-times" @click="logs=[]"></i>
             <div :class="'console-item '+item.type" v-for="item in logs">{{ item.msg }}</div>
@@ -175,6 +211,10 @@ onMounted(async ()=>{
     background-color: #171717;
     overflow: auto;
     color: #eee;
+    iframe{
+        width: 100%;
+        background-color: #171717;
+    }
     button, input, select, textarea{
         margin: 5px;
         padding: 4px 8px;
@@ -203,7 +243,8 @@ onMounted(async ()=>{
     }
     &.console-result{
         position: relative;
-        padding: 5px 0px;;
+        padding: 5px 0px;
+        white-space: pre;
         .ei-times{
             font-size: 18px;
             position: absolute;

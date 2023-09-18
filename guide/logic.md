@@ -4,7 +4,45 @@
 
 ## 1. If 组件
 
+If 组件用于表达分支逻辑，当匹配到某条件时，显示对应的UI。If 的判断条件使用 data 属性传入。支持布尔值和布尔表达式，使用如下
+
+<CodeBox/>
+
+```jsx
+let count: number = 0;
+const add = () => {count++};
+<div $$App>
+    <If data={count > 3}>
+        <div>Now count > 3</div>
+    </If>
+    <ElseIf data={count > 2}>
+        <button onclick:add>continue[count>2]</button>
+    </ElseIf>
+    <Else>
+        <button onclick:add>count={count}</button>
+    </Else>
+</div>;
+```
+
 ## 2. if 语法
+
+Alins 会将js的`if`语句编译成一个If逻辑组件，功能与If组件一致
+
+<CodeBox/>
+
+```jsx
+function Main () {
+    let count: number = 0;
+    const add = () => {count++};
+    if (count > 3) {
+        return <div>Now count > 3</div>;
+    } else if (count > 2){
+        return <button onclick:add>continue[count>2]</button>;
+    }
+    return <button onclick:add>count={count}</button>
+}
+<Main $$App/>;
+```
 
 ## 3. Switch 组件
 
