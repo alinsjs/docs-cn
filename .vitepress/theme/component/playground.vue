@@ -1,11 +1,19 @@
+<!--
+ * @Author: chenzhongsheng
+ * @Date: 2023-09-17 16:33:22
+ * @Description: Coding something
+-->
 <script setup lang="ts">
-import eveit from 'eveit'
-import {computed, ref} from 'vue';
+import eveit from 'eveit';
+import {computed, onMounted, ref} from 'vue';
+import {IS_DEV} from '../utils/alins-compiler';
 import pkg from 'lz-string';
 const { compressToEncodedURIComponent } = pkg;
 
 let nameRef = ref('');
 let codeRef = ref('');
+
+let loading = ref(true);
 
 eveit.on('playground-code', ({name = 'Custom Code', code})=>{
     if(!code) {
@@ -20,13 +28,23 @@ eveit.on('playground-code', ({name = 'Custom Code', code})=>{
     }
 });
 
+onMounted(()=>{
+    window.addEventListener('message', (e)=>{
+        if(e.data.type === 'playground_loaded'){
+            loading.value = false;
+        }
+    });
+})
+
 let src = computed(() => {
     if(!codeRef.value){
         return ''
     }
+    loading.value = true;
     const search = codeRef.value !== 'PLAYGROUND' ? `?name=${nameRef.value}&code=${codeRef.value}`: '';
-    return `https://alinsjs.github.io/playground/${search}`;
+    return IS_DEV ? `http://localhost:5174/${search}`: `https://alinsjs.github.io/playground/${search}`;
 });
+
 
 function openStandalone(){
     window.open(src.value);
@@ -41,6 +59,7 @@ function close(){
 
 <template>
     <div v-show="codeRef !== ''" class="iframe-block">
+        <i v-show="loading" class="ei-spinner-snake ei-spin"></i>
         <div class="iframe-title">
             <span @click="close"><i class="ei-times"></i> Close</span>
             <span @click="openStandalone"><i class="ei-window-alt"></i> Open Standalone</span>
@@ -58,6 +77,13 @@ function close(){
     width: 100%;
     height: 100%;
     background-color: #222;
+    .ei-spinner-snake{
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 30px;
+    }
     .iframe-title{
         position: absolute;
         font-family: var(--font);

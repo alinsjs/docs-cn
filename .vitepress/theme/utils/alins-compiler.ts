@@ -3,6 +3,7 @@
  * @Date: 2023-09-08 13:17:31
  * @Description: Coding something
  */
+export const IS_DEV = false; // location.hostname === 'localhost';
 
 export async function compileCode(code: string){
     return (await getCompiler())(code, { useImport: true, ts: true });
@@ -105,8 +106,8 @@ export function createIFrameSrc (code: string, id: string, isHtml: boolean) {
     } else {
         const alinsSrc = location.host.startsWith('localhost') ? 
         `${location.origin}/alins.iife.min.js`:
-        `${location.origin}/${location.pathname.split('/').slice(0,2).join('/')}/alins.iife.min.js`;
-    // const alinsSrc = __DEV__ ? 'http://localhost:5173/alins.iife.min.js' : 'https://cdn.jsdelivr.net/npm/alins';
+        'https://cdn.jsdelivr.net/npm/alins';
+        // `${location.origin}/${location.pathname.split('/').slice(0,2).join('/')}/alins.iife.min.js`;
         html = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -142,12 +143,19 @@ export function createIFrameSrc (code: string, id: string, isHtml: boolean) {
 <body>
     <div id="App"></div>
     <script>
+        function postMsg(type, data=[]) {
+            window.parent.postMessage({type, data, id: '${id}'});
+        }
         console.log = (...args) => {
-            window.parent.postMessage({type: 'iframe_log', data: args, id: '${id}'});
+            postMsg('iframe_log', args);
         };
         console.clear = () => {
-            window.parent.postMessage({type: 'iframe_clear_log', id: '${id}'});
+            postMsg('iframe_clear_log');
         };
+        window.addEventListener('DOMContentLoaded', () => {
+            postMsg('iframe_loaded');
+        });
+        
     </script>
     <script>
 ${code}

@@ -70,12 +70,10 @@ import {
 </script>
 ```
 
-注：第二个 react 使用表示将字符串与响应式数据进行拼接，可以使文本获得响应式能力。你也可以使用数组形式
+注：第二个 react 使用表示将字符串与响应式数据进行拼接，返回一个数组。你也可以直接使用数组形式
 
 ```js
-[
-    'count is ', count, '; countAdd1 is ', countAdd1
-]
+['count is ', count, '; countAdd1 is ', countAdd1]
 ```
 
 其他API具体使用可以参考 [alins-standalone.d.ts](https://cdn.jsdelivr.net/npm/alins-standalone/dist/alins-standalone.d.ts)

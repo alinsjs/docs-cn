@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import {onMounted, ref} from 'vue';
+import {createApp, onMounted, ref} from 'vue';
 import {compileCode, download, copy, countCodeSize, createIFrameSrc} from '../utils/alins-compiler';
 import eveit from 'eveit'
+import Playground from './playground.vue'
 
 import hljs from 'highlight.js/lib/core';
 
@@ -69,11 +70,22 @@ function copyCode(){
 }
 
 function openInPlayground(){
-    console.log(code.value);
+    // console.log(code.value);
     eveit.emit('playground-code', {code: code.value})
 }
 
+function initIFrame(){
+    if(document.getElementById('PlayGround')) return;
+    const iframe = document.createElement('div');
+    iframe.id = 'PlayGround';
+    document.body.appendChild(iframe);
+    createApp(Playground).mount('#PlayGround');
+}
+
 onMounted(async ()=>{
+
+    initIFrame();
+
     const codeEle = blockRef.value.nextSibling;
     const codeDom = codeEle.querySelector('code');
 
@@ -118,6 +130,8 @@ onMounted(async ()=>{
                 mockConsole.log(...data.data);
             }else if(data.type === 'iframe_clear_log'){
                 mockConsole.clear();
+            }else if(data.type === 'iframe_loaded'){
+                // console.warn('1111111111')
             }
         });
     } else {

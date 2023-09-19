@@ -12,7 +12,7 @@ import javascript from 'highlight.js/lib/languages/javascript';// Then register 
 import CodeBox from './component/code-box.vue'
 import CodeCompare from './component/code-compare.vue'
 import ViewImg from './component/view-img.vue'
-import Playground from './component/playground.vue'
+// import Playground from './component/playground.vue'
 import Text from './component/highlight.vue'
 // import HomeSponsors from './components/HomeSponsors.vue'
 // import AsideSponsors from './components/AsideSponsors.vue'
@@ -24,10 +24,7 @@ export default {
   ...Theme,
   Layout() {
     // todo build报错
-    const iframe = document.createElement('div');
-    iframe.id = 'PlayGround';
-    document.body.appendChild(iframe);
-    createApp(Playground).mount('#PlayGround');
+    // createApp(Playground).mount('#PlayGround');
     return h(Theme.Layout, null, {
       // 'home-features-after': () => h(HomeSponsors),
       // 'aside-ads-before': () => h(AsideSponsors),
