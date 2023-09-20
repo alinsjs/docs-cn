@@ -22,7 +22,7 @@ Alins提供了一个可供开发调试使用的浏览器环境的编译器，由
     <title>Document</title>
 </head>
 <body>
-    <script src='https://cdn.jsdelivr.net/npm/alins-compiler-web'></script>
+    <script src='https://unpkg.com/alins-compiler-web'></script>
     <script type='text/alins'> 
         let count = 1;
         <button onclick={count++} $$body>

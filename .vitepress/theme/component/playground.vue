@@ -13,9 +13,11 @@ const { compressToEncodedURIComponent } = pkg;
 let nameRef = ref('');
 let codeRef = ref('');
 
+let isIframe = ref(false)
+
 let loading = ref(true);
 
-eveit.on('playground-code', ({name = 'Custom Code', code})=>{
+eveit.on('playground-code', ({name = 'Custom Code', code, iframe})=>{
     if(!code) {
         close();
     }else if(code === 'PLAYGROUND'){
@@ -26,6 +28,7 @@ eveit.on('playground-code', ({name = 'Custom Code', code})=>{
         codeRef.value = compressToEncodedURIComponent(code);
         document.body.style.overflow = 'hidden'
     }
+    isIframe.value = iframe || false;
 });
 
 onMounted(()=>{
@@ -41,8 +44,8 @@ let src = computed(() => {
         return ''
     }
     loading.value = true;
-    const search = codeRef.value !== 'PLAYGROUND' ? `?name=${nameRef.value}&code=${codeRef.value}`: '';
-    return IS_DEV ? `http://localhost:5174/${search}`: `https://alinsjs.github.io/playground/${search}`;
+    const search = codeRef.value !== 'PLAYGROUND' ? `?name=${nameRef.value}&code=${codeRef.value}&iframe=${isIframe.value?1:0}`: '';
+    return IS_DEV() ? `http://localhost:5174/${search}`: `https://${location.hostname}/playground/${search}`;
 });
 
 

@@ -3,7 +3,7 @@
  * @Date: 2023-09-08 13:17:31
  * @Description: Coding something
  */
-export const IS_DEV = false; // location.hostname === 'localhost';
+export const IS_DEV = () => location.hostname === 'localhost';
 
 export async function compileCode(code: string){
     return (await getCompiler())(code, { useImport: true, ts: true });
@@ -50,7 +50,7 @@ function createAlinsHTML (name: string, code: string) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${name}</title>
-    <script src="https://cdn.jsdelivr.net/npm/alins-compiler-web"></script>
+    <script src="https://unpkg.com/alins-compiler-web"></script>
 </head>
 <body>
     <!--
@@ -98,16 +98,12 @@ export function countCodeSize(code: string){
     return size+' byte';
 }
 
-// <script src="https://cdn.jsdelivr.net/npm/alins-compiler-web"></script>
 export function createIFrameSrc (code: string, id: string, isHtml: boolean) {
     let html = '';
     if(isHtml){
         html = code;
     } else {
-        const alinsSrc = location.host.startsWith('localhost') ? 
-        `${location.origin}/alins.iife.min.js`:
-        'https://cdn.jsdelivr.net/npm/alins';
-        // `${location.origin}/${location.pathname.split('/').slice(0,2).join('/')}/alins.iife.min.js`;
+        const alinsSrc = IS_DEV() ? `${location.origin}/alins.iife.min.js`: `https://unpkg.com/alins`;
         html = `<!DOCTYPE html>
 <html lang="en">
 <head>

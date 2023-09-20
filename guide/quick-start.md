@@ -19,7 +19,7 @@ npm run dev
 ## 1.2 使用Web编译器
 
 ```html
-<script src='https://cdn.jsdelivr.net/npm/alins-compiler-web'></script>
+<script src='https://unpkg.com/alins-compiler-web'></script>
 <script type='text/alins'> 
     let count = 1;
     <button onclick={count++} $$body>

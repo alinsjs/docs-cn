@@ -20,7 +20,7 @@ import {/**import**/} from 'alins-standalone';
 ```
 
 ```js
-<script src='https://cdn.jsdelivr.net/npm/alins-standalone'></script>
+<script src='https://unpkg.com/alins-standalone'></script>
 <script> 
     window.Alins;
 </script>
@@ -56,7 +56,7 @@ import {
 <CodeBox :iframe='true' :height='40' :html='true'/>
 
 ```html
-<script src='https://cdn.jsdelivr.net/npm/alins-standalone'></script>
+<script src='https://unpkg.com/alins-standalone'></script>
 <script> 
     const {react, computed, Dom} = window.Alins
     let count = react(1);
@@ -76,4 +76,4 @@ import {
 ['count is ', count, '; countAdd1 is ', countAdd1]
 ```
 
-其他API具体使用可以参考 [alins-standalone.d.ts](https://cdn.jsdelivr.net/npm/alins-standalone/dist/alins-standalone.d.ts)
+其他API具体使用可以参考 [alins-standalone.d.ts](https://unpkg.com/alins-standalone/dist/alins-standalone.d.ts)

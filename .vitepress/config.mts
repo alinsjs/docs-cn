@@ -9,7 +9,7 @@ import { defineConfig } from 'vitepress'
 
 const isProd = true;
 
-const version = '0.0.30'
+const version = '0.0.31'
 
 export default defineConfig({
   title: `Alins Docs(v${version})`,
@@ -27,14 +27,14 @@ export default defineConfig({
     ['meta', { name: 'twitter:site', content: '@alins_js' }],
     ['meta', { name: 'theme-color', content: '#646cff' }],
     [
-      // 'script', {src: `https://cdn.jsdelivr.net/npm/alins-compiler-web@${version}`}
+      // 'script', {src: `https://unpkg.com/alins-compiler-web@${version}`}
       'script', { 
-        src: isProd ? `https://cdn.jsdelivr.net/npm/alins-compiler-web@${version}`
+        src: isProd ? `https://unpkg.com/alins-compiler-web@${version}`
           : `/alins-compiler-web.iife.min.js`
       },
     ],
     ['link', { rel: 'stylesheet', href: isProd 
-      ? 'https://cdn.jsdelivr.net/gh/theajack/easy-icon/dist/easy-icon.css'
+      ? 'https://unpkg.com/easy-icon@1.1.0/offline/css/easy-icon.css'
       : `/easy-icon.offline.css` 
     }],
     

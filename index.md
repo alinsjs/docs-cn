@@ -24,14 +24,14 @@ features:
     title: 最纯粹的开发体验
     details: 秉持0-API的开发理念，尽可能降低开发者使用的心智负担
   - icon: 🛠️
-    title: 高度响应式
+    title: 完全响应式
     details: 细粒度的响应式支持，让一切皆可响应，同时不引入额外的响应式API
   - icon: ⚡️
     title: 极致的性能
     details: 未采用vdom，数据的变更直接最细粒度更新到dom，带来极致的性能体验
   - icon: 📦
     title: 完善的基础设置
-    details: 支持所有主流打包工具使用，配套有状态管理、路由、UI工具库
+    details: 支持主流构建工具使用，配套有状态管理、路由、UI工具库
   - icon: 🔑
     title: 友好的类型支持
     details: 完全采用TS开发，具有非常友好的类型支持

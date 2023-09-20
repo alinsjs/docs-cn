@@ -71,7 +71,7 @@ function copyCode(){
 
 function openInPlayground(){
     // console.log(code.value);
-    eveit.emit('playground-code', {code: code.value})
+    eveit.emit('playground-code', {code: code.value, iframe: props.iframe})
 }
 
 function initIFrame(){
