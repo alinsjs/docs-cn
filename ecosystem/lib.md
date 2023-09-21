@@ -13,9 +13,6 @@
 
 ## Next Version TODO
 
-- [ ] $if $elif $else $case $default 属性支持
-- [ ] @disable-compile、$disable_compile 原始作用域 支持
-- [ ] $static、$reactive label 支持
 - [ ] 生命周期优化，支持组件内使用；+ 语法糖 $remove: el => {};
 - [ ] computed 重构；dirty 标记。优化 const b = a++;
 - [ ] Branch 内存占用问题
@@ -27,7 +24,6 @@
 - [ ] alins-style 支持兼容性扩展
 - [ ] alins-ssr - 服务端渲染（尽可能通用 能够直接使用原生js调用）
 - [ ] For 支持解构
-- [ ] 新增 Frag 组件，定位是用于可以挂载属性的 <></>
 - [ ] For Object 支持
 - [ ] source-map 支持
 - [ ] 编译器代码重构 - 分两步编译 第一步进行jsx解析；第二部进行alins reactive； 支持 ssr

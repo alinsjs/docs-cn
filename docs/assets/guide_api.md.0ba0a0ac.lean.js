@@ -1,1 +1,0 @@
-import{_ as a,o as s,c as e,S as t}from"./chunks/framework.3dadb9de.js";const D=JSON.parse('{"title":"API","description":"","frontmatter":{},"headers":[],"relativePath":"guide/api.md","filePath":"guide/api.md"}'),n={name:"guide/api.md"},o=t("",4),l=[o];function p(c,i,r,_,d,h){return s(),e("div",null,l)}const m=a(n,[["render",p]]);export{D as __pageData,m as default};

@@ -1,1 +1,0 @@
-import{_ as i,o as l,c as e,S as t}from"./chunks/framework.3dadb9de.js";const p=JSON.parse('{"title":"周边工具","description":"","frontmatter":{},"headers":[],"relativePath":"ecosystem/lib.md","filePath":"ecosystem/lib.md"}'),a={name:"ecosystem/lib.md"},s=t("",5),r=[s];function o(n,c,_,d,h,u){return l(),e("div",null,r)}const b=i(a,[["render",o]]);export{p as __pageData,b as default};
