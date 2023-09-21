@@ -36,6 +36,23 @@ console.log('Frag is a ', frag.constructor.name);
 document.getElementById('App').appendChild(frag);
 ```
 
+### Frag 标签
+
+您也可以通过 Frag 标签来返回一个 DocumentFragment，好处是使用 Frag 可以挂在属性。而空标签不可以
+
+<CodeBox/>
+
+```jsx
+const frag = <Frag>
+    <div>Div 1</div>
+    <div>Div 2</div>
+</Frag>;
+console.log('Frag is a ', frag.constructor.name);
+document.getElementById('App').appendChild(frag);
+```
+
+注：Frag标签挂载属性时，后续章节中介绍到的所有的属性都只会作用域第一个子元素，生命周期只会作用于第一个子节点。
+
 ## 2.$mount属性
 
 `$mount` 属性用于将JSX对象生成的DOM元素挂在到目标节点上，可以理解为 .appendChild 方法的语法糖，如第一小节中的例子等价于下面使用 $mount 属性的写法

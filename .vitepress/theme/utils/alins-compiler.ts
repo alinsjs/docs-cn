@@ -6,7 +6,7 @@
 export const IS_DEV = () => location.hostname === 'localhost';
 
 export async function compileCode(code: string){
-    return (await getCompiler())(code, { useImport: true, ts: true });
+    return (await getCompiler())(code, { importType: 'esm', ts: true });
 }
 
 function getCompiler(): Promise<(code:string, opt: any)=>string> {

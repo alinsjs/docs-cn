@@ -79,7 +79,7 @@ const result = parseAlins(code);
 parseAlins 方法一个可选的配置项，其中有三个可选属性：
 
 1. ts：是否支持 typescript 编译，默认为false
-2. useImport：是否使用 import 语句导入 alins，默认为false，表示使用 window.Alins 引入alins
+2. importType：引入alins的方式，可选值有 esm、cjs、iife。默认值为 esm，表示使用import语句引入alins
 3. filename：当前code模块文件名，默认会自动生成
 
 ```js
@@ -87,7 +87,7 @@ const {parseAlins} = require('alins-compiler-node');
 const code = 'let a=1; a++;';
 const result = parseAlins(code, {
     ts: false,
-    useImport: false,
+    importType: 'esm',
     filename: 'test.tsx',
 });
 ```
@@ -103,31 +103,55 @@ import {createBabelPluginAlins} from 'alins-compiler-core';
 const babelPlugin = createBabelPluginAlins();
 ```
 
-## 7. [babel-plugin-alins](https://www.npmjs.com/package/babel-plugin-alins)
+## 7. [babel-preset-alins](https://www.npmjs.com/package/babel-preset-alins)
 
-Alins babel 插件，安装好之后，在 .babelrc 中使用：
+Alins babel 预设，自带jsx和typescript转译功能，安装好之后，在 babel.config.json 或 babel.config.js 中使用：
 
 ```js
 {
-  "plugins": [
-    "alins"
-  ]
+  "presets": [ "alins" ]
 }
 ```
 
-支持携带 useImport 参数，表示使用，默认为true
+支持携带 importType、ts、jsx 参数，importType、ts参数含义与5中一致；jsx参数表示是否开启jsx转译，默认为true
 
 ```js
 {
-  "plugins": [
+  "presets": [
     ["alins", {
-      "useImport": false
+      "importType": "esm",
+      "ts": false,
+      "jsx": true
     }]
   ]
 }
 ```
 
-## 8. [eslint-config-alins](https://www.npmjs.com/package/eslint-config-alins)
+## 8. [babel-plugin-alins](https://www.npmjs.com/package/babel-plugin-alins)
+
+Alins babel 插件，不包含jsx和typescript转译功能，需要自行安装对应的插件，建议直接使用 [babel-preset-alins](https://www.npmjs.com/package/babel-preset-alins)
+
+安装好之后，在 babel.config.json 或 babel.config.js 中使用：
+
+```js
+{
+  "plugins": [ "alins" ]
+}
+```
+
+支持携带 importType 参数，与5中含义一致，默认值为esm
+
+```js
+{
+  "plugins": [
+    ["alins", {
+      "importType": "esm"
+    }]
+  ]
+}
+```
+
+## 9. [eslint-config-alins](https://www.npmjs.com/package/eslint-config-alins)
 
 Alins eslint config模块，安装好之后，在 .eslintrc 文件中配置：
 

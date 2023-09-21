@@ -148,11 +148,28 @@ let name1 = 1;
 import {data} from './data';
 ```
 
-<!-- ### 4.3 标签 -->
+### 4.3 标签
+
+通过 `_` 和 `$` 标签也可以 强制声明静态数据或响应式数据，作用与 let 一致
+
+<CodeBox/>
+
+```jsx
+_: name1 = 1; // @static
+name1 ++;
+
+$: name2 = 2;
+
+<div $$App>Click output to view the compilation product</div>
+```
 
 ## 5. 静态域
 
-静态域中的声明的所有变量都会被强制标记为静态数据，可以使用 @static-scope 声明一个静态域。静态域对象可以是 函数、if语句、switch语句、for语句、块作用域、标签。
+静态域中的声明的所有变量都会被强制标记为静态数据，所有变量、计算数据、逻辑语句都会被编译器跳过。静态域中的JSX、强制标记响应式数据不会受到影响。静态域对象可以是 函数、if语句、switch语句、for语句、块作用域、标签。
+
+### 5.1 注释声明
+
+可以使用 @static-scope 声明一个静态域：
 
 <CodeBox/>
 
@@ -189,5 +206,41 @@ test: () => {
     let name = '';
     name ++; 
 };
+<div $$App>Click output to view the compilation product</div>;
+```
+
+### 5.2 函数命名声明
+
+使用下划线开头给函数命名同样可以声明一个静态作用域
+
+<CodeBox/>
+
+```jsx
+function _foo(){
+    let name = '';
+    name ++;
+}
+const _foo2 = () => {
+    let name = '';
+    name ++;
+}
+<div $$App>Click output to view the compilation product</div>;
+```
+
+### 5.2 标签声明
+
+也可以通过 static_scope 标签声明一个静态作用域
+
+<CodeBox/>
+
+```jsx
+static_scope: {
+    let name = '';
+    name ++;
+};
+static_scope: if(true){
+    let name = '';
+    name ++;
+}
 <div $$App>Click output to view the compilation product</div>;
 ```

@@ -243,3 +243,73 @@ function start(){
 
 <button onclick={start} $$App>Start</button>
 ```
+
+## 4. Nodejs 中使用
+
+在nodejs中使用需要首先将jsx文件通过alins相关插件编译成js文件。
+
+本例中使用 babel + [babel-plugin-alins](https://www.npmjs.com/package/babel-plugin-alins) 编译
+
+### 4.1 环境准备
+
+首先npm init初始化环境，然后安装以下包
+
+```
+npm i @babel/core @babel/node alins babel-preset-alins -D
+```
+
+配置 babel.config.json
+
+```json
+{
+    "presets": [ ["alins", {"importType": "cjs"}] ]
+}
+```
+
+新建 index.jsx
+
+```jsx
+const { version } = require('alins');
+console.log('Hello Alins! v = ', version);
+```
+
+package.json 增加脚本：
+
+```json
+"scripts": {
+    "dev": "babel-node ./index.jsx"
+},
+```
+
+然后执行 `npm run dev`，看到打印了 Hello Alins! 就表示安装成功了。
+
+### 4.2 自定义渲染器
+
+将index.jsx中文件修改为以下代码：
+
+```jsx
+const { useRenderer } = require('alins');
+
+const root = useRenderer({
+    render (node) {
+        const prefix = new Array(node.deep).fill('  ').join('');
+        const text = `${node.innerText}`;
+        console.log(`${prefix}${node.tagName || 'text'}: ${text.trim()}`);
+    }
+});
+let v = 0;
+const v2 = v * 2;
+<div $mount={root}>
+        value = {v}
+    <div>value * 2 = {v2}</div>
+</div>;
+function loopRender () {
+    v ++;
+    console.clear();
+    root.render();
+    setTimeout(loopRender, 1000);
+}
+loopRender();
+```
+
+然后执行 `npm run dev`，就可以看到在控制台中打印的ui了

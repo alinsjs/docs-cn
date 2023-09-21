@@ -33,20 +33,37 @@ Alins提供了一个可供开发调试使用的浏览器环境的编译器，由
 </html>
 ```
 
-## 2. script type
+## 2. type属性
 
 Web编译器可以识别三种 type, `text/alins`, `text/babel`, `text/jsx`, 将其中的代码进行编译执行。
 
-## 3. import&ts
+## 3. import属性
 
-import 属性可以用于使用使用 import 语句引入alins，默认为false
+可以使用 import 属性置顶import语句的引入方式，可选值有:
+
+1. esm: 表示使用 import 语句引入alins
+2. cjs: 表示使用 require 方法引入alins
+3. iife 表示从 window.Alins引入alins，默认值为 iife
+
+使用方式如下
+
+```html
+<script type='text/alins' import="esm"> 
+    let count = 1;
+    <button onclick={count++} $$body>
+        count is {count}
+    </button>;
+</script>
+```
+
+## 4. ts属性
 
 ts 属性用于是否使用 typescript
 
 开启方式如下
 
 ```html
-<script type='text/alins' import ts> 
+<script type='text/alins' ts> 
     let count: number = 1;
     <button onclick={count++} $$body>
         count is {count}
