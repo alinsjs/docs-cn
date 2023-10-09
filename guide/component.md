@@ -2,7 +2,7 @@
 
 Alins 组件的使用与 JSX 组件基本一致，组件本身是一个返回 JSX对象的函数，所以组件返回的也是原生DOM元素。组件的第一个参数为属性，第二个参数为组件内的元素。
 
-组件内部的代码只会被执行一次，绑定数据的变更只会导致细粒度的元素更新，整个组件不会被重新渲染。
+组件内部的代码只会被执行一次，绑定数据的变更只会导致细粒度的元素更新，整个组件不会被重新渲染。组件仅仅作为UI逻辑的组织形式。
 
 ## 1. 属性
 
@@ -18,7 +18,7 @@ function Component(props){
 }
 
 let a = 1, b = 2;
-<div $$App>
+<div $mount='#App'>
     <Component a={a} b={b} />
     <button onclick={()=>{
         a ++;
@@ -27,9 +27,9 @@ let a = 1, b = 2;
 </div>
 ```
 
-### 属性结构
+### 属性解构
 
-属性的传入和使用都支持使用属性解构，并且不会是属性丢失响应式能力。
+属性的传入和使用都支持使用属性解构，并且不会使属性丢失响应式能力。
 
 <CodeBox/>
 
@@ -41,7 +41,7 @@ function Component({a, b}){
 }
 
 let data = {a: 1, b: 2};
-<div $$App>
+<div $mount='#App'>
     <Component {...data} />
     <button onclick={()=>{
         data.a ++;
@@ -52,9 +52,9 @@ let data = {a: 1, b: 2};
 
 ## 2. JSX扩展属性
 
-Alins组件不支持以下JSX扩展属性：$attributes、$html、$ref，因为这几个属性是直接作用与DOM元素上的。组件由于本身并不直接表示DOM元素，所以无法使用上述属性。
+Alins组件不支持以下JSX扩展属性：$attributes、$html、$ref，因为这几个属性是直接作用于DOM元素上的。组件由于本身并不直接表示DOM元素，所以无法使用上述属性。
 
-由于组件的返回值可以是DOM元素或者 HTMLDocument，而 HTMLDocument 在 mounted和removed监听上存在一定局限性，所以 Alins 对于生命周期属性做了一些处理。当返回值是DOM元素时，直接作用于组件返回值；当返回值是 HTMLDocument，作用于第一个是DOM元素的子节点。
+由于组件的返回值可以是DOM元素或者 DocumentFragment，而 DocumentFragment 在 mounted和removed监听上存在一定局限性，所以 Alins 对于生命周期属性做了一些处理。当返回值是DOM元素时，直接作用于组件返回值；当返回值是 DocumentFragment，作用于第一个是DOM元素的子节点。
 
 组件使用$mount 以及 生命周期属性例子如下：
 
@@ -69,7 +69,7 @@ function Component () {
     </div>;
 }
 
-<Component $$App
+<Component $mount='#App'
     $mounted={(dom) => {console.log('mounted', dom.tagName);}}
     $appended={(dom) => {console.log('appended', dom.tagName);}}
     $removed={(dom) => {console.log('removed', dom.tagName);}}
@@ -92,14 +92,14 @@ function Counter ({count}, children) {
 }
 
 let count = 0;
-<Counter $$App count={count}>
+<Counter $mount='#App' count={count}>
     <button onclick={count ++}>Increase Count</button>
 </Counter>;
 ```
 
 ## 4. 异步组件
 
-异步函数也可以作为组件使用，我们成为`异步组件`，Alins遇到异步组件时，会先在生成一个空节点作为锚点返回，在异步组件执行完毕返回真正的节点时，再替换掉锚点。
+异步函数也可以作为组件使用，我们称为`异步组件`，Alins遇到异步组件时，会先生成一个空节点作为锚点返回，在异步组件执行完毕返回真正的节点时，再替换掉锚点。
 
 <CodeBox/>
 
@@ -112,12 +112,12 @@ function mockFetch(){
     });
 }
 
-async function Componnt(){
+async function Component(){
     const data = await mockFetch();
     return <div>name={data.name}; age={data.age}</div>
 }
 
-<button onclick={<Componnt $$App/>} $$App>
+<button onclick={<Component $mount='#App'/>} $mount='#App'>
     Mount Async Component
 </button>
 ```
@@ -142,7 +142,7 @@ let msg = 'Hello';
 function modifyMsg(){
     msg += '!';
 }
-<Component msg={msg} modifyMsg={modifyMsg} $$App>
+<Component msg={msg} modifyMsg={modifyMsg} $mount='#App'>
     <button onclick={msg += '!'}>父组件修改msg</button>
 </Component>
 ```

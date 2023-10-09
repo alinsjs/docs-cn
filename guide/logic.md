@@ -15,7 +15,7 @@ If组件 的判断条件使用 data 属性传入。支持布尔值和布尔表�
 ```jsx
 let count: number = 0;
 const add = () => {count++};
-<div $$App>
+<div $mount='#App'>
     <If data={count > 3}>
         <div>Now count > 3</div>
     </If>
@@ -37,7 +37,7 @@ const add = () => {count++};
 ```jsx
 let count: number = 0;
 const add = () => {count++};
-<div $$App>
+<div $mount='#App'>
     <div $if={count>3}>Now count > 3</div>
     <button $elseif={count > 2} onclick:add>continue[count>2]</button>
     <button $else onclick:add>count={count}</button>
@@ -51,7 +51,7 @@ const add = () => {count++};
 ```jsx
 let count: number = 0;
 const add = () => {count++};
-<div $$App>
+<div $mount='#App'>
     <div $if={count>3}>Now count > 3</div>
     <ElseIf data={count > 2}>
         <button onclick:add>continue[count>2]</button>
@@ -78,7 +78,7 @@ function Main () {
     }
     return <button onclick:add>count={count}</button>
 }
-<Main $$App/>;
+<Main $mount='#App'/>;
 ```
 
 ## 2. Switch 逻辑
@@ -112,7 +112,7 @@ function Main () {
         </Default>
     </Switch>;
 }
-<Main $$App/>;
+<Main $mount='#App'/>;
 ```
 
 同时 Case 组件支持 break 属性，用于表示是否立即跳出 Switch 逻辑。默认值为true。
@@ -135,12 +135,29 @@ function Main () {
         </Default>
     </Switch>;
 }
-<Main $$App/>;
+<Main $mount='#App'/>;
 ```
 
 ### 3.2 属性
 
-可以使用 $switch、$case、$default 属性来完成If逻辑的实现:
+可以使用 $switch、$case、$default 属性来完成Switch逻辑的实现:
+
+<CodeBox/>
+
+```jsx
+function Main () {
+    let count = 0;
+    const add = () => {count++;};
+    return <div $switch={count}>
+        <button $case={1} $break={false} onclick={add}>Count is 1</button>
+        <button $case={2} onclick={add}>Count is 1 or 2:{count}</button>
+        <button $default onclick={add}>Other Count:{count}</button>
+    </div>;
+}
+<Main $mount='#App'/>;
+```
+
+注：switch逻辑的属性和组件可以任意混合使用：
 
 <CodeBox/>
 
@@ -158,24 +175,7 @@ function Main () {
         </Default>
     </div>;
 }
-<Main $$App/>;
-```
-
-注：switch逻辑的属性和组件可以任意混合使用：
-
-<CodeBox/>
-
-```jsx
-function Main () {
-    let count = 0;
-    const add = () => {count++;};
-    return <div $switch={count}>
-        <button $case={1} $break={false} onclick={add}>Count is 1</button>
-        <button $case={2} onclick={add}>Count is 1 or 2:{count}</button>
-        <button $default onclick={add}>Other Count:{count}</button>
-    </div>;
-}
-<Main $$App/>;
+<Main $mount='#App'/>;
 ```
 
 ### 3.3 语句
@@ -197,7 +197,7 @@ function Main () {
     }
     return <button onclick={add}>Other Count:{count}</button>;
 }
-<Main $$App/>;
+<Main $mount='#App'/>;
 ```
 
 ## 4. For 逻辑
@@ -213,7 +213,7 @@ For 组件使用data属性传入数组，使用方式如下：
 ```jsx
 const list = [{name: 'Bob', age: 10}, {name: 'Alice', age: 11}]
 let age = 10;
-<div $$App>
+<div $mount='#App'>
     <button onclick={
         list.unshift({name: 'Tom', age: age++})
     }>Add Person</button>
@@ -240,7 +240,7 @@ let age = 10;
 ```jsx
 const list = [{name: 'Bob', age: 10}, {name: 'Alice', age: 11}]
 let age = 10;
-<div $$App>
+<div $mount='#App'>
     <button onclick={
         list.unshift({name: 'Tom', age: age++})
     }>Add Person</button>
@@ -265,7 +265,7 @@ let age = 10;
 ```jsx
 const list = [{name: 'Bob', age: 10}, {name: 'Alice', age: 11}]
 let age = 10;
-<div $$App>
+<div $mount='#App'>
     <button onclick={
         list.unshift({name: 'Tom', age: age++})
     }>Add Person</button>
@@ -301,7 +301,7 @@ function Component(){
     </Async>;
 }
 
-<button onclick={<Component $$App/>} $$App>
+<button onclick={<Component $mount='#App'/>} $mount='#App'>
     Mount Async Component
 </button>
 ```
@@ -335,7 +335,7 @@ function Component(){
     </div>;
 }
 
-<button onclick={<Component $$App/>} $$App>
+<button onclick={<Component $mount='#App'/>} $mount='#App'>
     Mount Async Component
 </button>
 ```
@@ -358,7 +358,7 @@ Show 逻辑用于控制UI是否显示。与If的区别在于隐藏的组件依�
 
 ```jsx
 let show: boolean = false;
-<div $$App>
+<div $mount='#App'>
     <button onclick={show = !show}>Toggle Show</button>
     <Show data={show}>
         <div>Show Element</div>
@@ -374,9 +374,9 @@ let show: boolean = false;
 
 ```jsx
 let show: boolean = false;
-<div $$App>
+<div $mount='#App'>
     <button onclick={show = !show}>Toggle Show</button>
-    <div $show:show>Show Element 2</div>
+    <div $show={show}>Show Element 2</div>
 </div>
 ```
 

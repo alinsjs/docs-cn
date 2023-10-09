@@ -11,7 +11,7 @@ Alins提供了一个可供开发调试使用的浏览器环境的编译器，由
 
 将以下代码保存在 html 文件中便可以直接在浏览器环境编译运行alins应用：
 
-<CodeBox :iframe='true' :height='40' :html='true'/>
+<CodeBox :iframe='true' :height='60' :html='true'/>
 
 ```html
 <!DOCTYPE html>
@@ -25,7 +25,7 @@ Alins提供了一个可供开发调试使用的浏览器环境的编译器，由
     <script src='https://unpkg.com/alins-compiler-web'></script>
     <script type='text/alins'> 
         let count = 1;
-        <button onclick={count++} $$body>
+        <button onclick={count++} $mount='body'>
             count is {count}
         </button>;
     </script>
@@ -50,7 +50,7 @@ Web编译器可以识别三种 type, `text/alins`, `text/babel`, `text/jsx`, 将
 ```html
 <script type='text/alins' import="esm"> 
     let count = 1;
-    <button onclick={count++} $$body>
+    <button onclick={count++} $mount='body'>
         count is {count}
     </button>;
 </script>
@@ -65,7 +65,7 @@ ts 属性用于是否使用 typescript
 ```html
 <script type='text/alins' ts> 
     let count: number = 1;
-    <button onclick={count++} $$body>
+    <button onclick={count++} $mount='body'>
         count is {count}
     </button>;
 </script>

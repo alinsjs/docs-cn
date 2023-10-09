@@ -15,7 +15,7 @@
 function logClient(event){
     console.log('Position is', event.clientX, event.clientY);
 }
-<button $$App
+<button $mount='#App'
     onclick={logClient}
     onmouseleave={console.log('Mouse Leave!')}
 >Click Me</button>;
@@ -28,7 +28,7 @@ function logClient(event){
 <CodeBox/>
 
 ```jsx
-<button $$App
+<button $mount='#App'
     onclick={console.log('ClientX = ', $e.clientX)}
 >Click Me</button>;
 ```
@@ -47,9 +47,9 @@ prevent 用于阻止事件的默认行为，内部调用了 event.preventDefault
 function click(){
     console.log('Prevent checkbox checked!');
 }
-<div $$App>
+<div $mount='#App'>
     Normal: <input type='checkbox'/><br/>
-    Prevent And Alert: <input onclick:prevent={click} type='checkbox'/><br/>
+    Prevent And Log: <input onclick:prevent={click} type='checkbox'/><br/>
     Only Prevent: <input onclick:prevent type='checkbox'/>
 </div>
 ```
@@ -64,13 +64,13 @@ stop 用于阻止事件冒泡，内部调用了 event.stopPropagation
 function click(from: string){
     console.log(`Click from ${from}!`);
 }
-<div $$App>
+<div $mount='#App'>
     <div onclick={click('parent')}>
         Normal: 
         <button onclick={click('child')}>Click Me!</button>
     </div>
     <div onclick={click('parent')}>
-        StopPropagation With Alert: 
+        StopPropagation With Log: 
         <button onclick:stop={click('child')}>Click Me!</button>
     </div>
     <div onclick={click('parent')}>
@@ -90,7 +90,7 @@ capture 用于开启事件捕获，当携带时，会将事件的 useCapture 传
 function click(from: string){
     console.log(`Click from ${from}!`);
 }
-<div $$App>
+<div $mount='#App'>
     <div onclick={click('parent')}>
         Normal: <button onclick={click('child')}>Click Me!</button>
     </div>
@@ -110,7 +110,7 @@ once 表示事件仅仅触发一次
 function click(){
     console.log('Clicked, try again!');
 }
-<div $$App>
+<div $mount='#App'>
     <div>
         Normal: <button onclick={click}>Click Me!</button>
     </div>
@@ -130,7 +130,7 @@ self 表示仅仅 event.target 为当前dom元素时才触发
 function click(from: string){
     console.log(`Click from ${from}!`);
 }
-<div $$App>
+<div $mount='#App'>
     <div onclick={click('parent')}>
         Normal: 
         <button onclick={click('child')}>Click Me!</button>
@@ -157,7 +157,7 @@ function click(from: string){
         console.log(`Click from ${from}!`);
     }
 }
-<div $$App>
+<div $mount='#App'>
     <div>
         Normal [Won't Log Click From]: 
         <button onclick={click('child1')}>Click Me!</button>

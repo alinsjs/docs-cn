@@ -48,7 +48,7 @@ function increaseCount(e){
     count ++;
     console.log(e.target.outerHTML);
 }
-<button $$App
+<button $mount='#App'
     onclick={increaseCount} 
     count-attr={count} 
     class={`count-${count}`}
@@ -57,7 +57,7 @@ function increaseCount(e){
 </button>;
 ```
 
-注：$$App 表示将元素挂载到 id为 #App 的元素上，后续章节中会有介绍
+注：$mount='#App' 表示将元素挂载到 id为 App 的元素上，后续章节中会有介绍
 
 ### 双向绑定
 
@@ -70,7 +70,7 @@ let count = 0;
 function increaseCount(e){
     count ++;
 }
-<div $$App>
+<div $mount='#App'>
     <input value={count} />
     <button onclick={increaseCount}>
         Counst is {count}
@@ -83,7 +83,7 @@ function increaseCount(e){
 
 Alins 组件的使用与 JSX 组件基本一致，组件本身是一个返回 JSX对象的函数，所以组件返回的也是原生DOM元素。组件的第一个参数为属性，第二个参数为组件内的元素。
 
-组件内部的代码只会被执行一次，绑定数据的变更只会导致细粒度的元素更新，整个组件不会被重新渲染。
+组件内部的代码只会被执行一次，绑定数据的变更只会导致细粒度的元素更新，整个组件不会被重新渲染。组件仅仅作为UI逻辑的组织形式。
 
 以下是一个组件的基础示例：
 
@@ -95,7 +95,7 @@ function Component(props, children){
         {children} {props.msg}!
     </span>;
 }
-<Component msg='World' $$App>
+<Component msg='World' $mount='#App'>
     <span>Hello</span> 
 </Component>
 ```
@@ -122,7 +122,7 @@ let msg = 'Hello';
 function modifyMsg(){
     msg += '!';
 }
-<Component msg={msg} modifyMsg={modifyMsg} $$App>
+<Component msg={msg} modifyMsg={modifyMsg} $mount='#App'>
     <button onclick={msg += '!'}>父组件修改msg</button>
 </Component>
 ```
@@ -135,4 +135,4 @@ Alins 主要分为编译器和运行时两部分。
 
 运行时负责运行编译产物，对响应式数据、数据绑定、逻辑语句等进行处理，使应用能够正确的运行，运行时的响应式基础是Proxy API。
 
-Alins的运行时不包含 VDom，JSX元素会被直接生成真实的DOM元素，Alins最大的特点与有点在于，每一个响应式绑定都是以最小的粒度进行的，所以在数据发生变更的时候，对应的元素可以以单个 TextNode、类名、单个样式进行更新，每一次更新操作都可以确保以最小的成本完成。
+Alins的运行时不包含 VDom，JSX元素会被直接生成真实的DOM元素，Alins最大的特点与优点在于，每一个响应式绑定都是以最小的粒度进行的，所以在数据发生变更的时候，对应的元素可以以单个 TextNode、类名、单个样式进行更新，每一次更新操作都可以确保以最小的成本完成。

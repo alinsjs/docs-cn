@@ -1,6 +1,6 @@
 # 自定义渲染器
 
-Alins 虽然是直接操作的DOM元素，但是也做了一层可选的UI抽象层，使得开发者可以通过修改render函数或者自定义渲染元素来进行自定义渲染或者跨平台开发。
+Alins 虽然是直接操作DOM元素，但是也做了一层可选的UI抽象层，使得开发者可以通过修改render函数或者自定义渲染元素来进行自定义渲染或者跨平台开发。
 
 ## 1. 自定义render函数
 
@@ -8,7 +8,7 @@ Alins 虽然是直接操作的DOM元素，但是也做了一层可选的UI抽象
 
 以下是一个使用 console.log 打印 UI抽象层的例子：
 
-<CodeBox :iframe='true' :height='50'></CodeBox>
+<CodeBox :iframe='true' :height='60'></CodeBox>
 
 ```jsx
 import { useRenderer, CustomElement } from 'alins';
@@ -35,7 +35,7 @@ function start(){
     }
     loopRender();
 }
-<button onclick={start} $$App>Start</button>
+<button onclick={start} $mount='#App'>Start</button>
 ```
 
 ## 2. 使用canvas作为容器
@@ -53,7 +53,7 @@ function start(e){
     let msg = 'Hello World';
     
     let canvas;
-    <div $$App>
+    <div $mount='#App'>
         <canvas $ref={canvas} style='border: 1px solid #666;'></canvas>
         <div>msg = {msg}</div>
         <button onclick={msg += '!'}>Click Me </button>
@@ -63,10 +63,10 @@ function start(e){
 
     const root = useRenderer({
         render (element: CustomElement) {
-            const _parent = element.parentElement || { deep: 0 };
-            if (!_parent.textLeft) _parent.textLeft = 10;
-            ctx.fillText(element.textContent, _parent.textLeft, (_parent.deep - 1)  * 15 + 10);
-            _parent.textLeft += (ctx.measureText(element.textContent).width);
+            const parent = element.parentElement || { deep: 0 }; // @static
+            if (!parent.textLeft) parent.textLeft = 10;
+            ctx.fillText(element.textContent, parent.textLeft, (parent.deep - 1)  * 15 + 10);
+            parent.textLeft += (ctx.measureText(element.textContent).width);
             return el => {el.textLeft = 0;};
         },
     });
@@ -83,7 +83,7 @@ function start(e){
     }
 }
 
-<button onclick={start} $$App>Start</button>
+<button onclick={start} $mount='#App'>Start</button>
 
 function initCanvasCtx (canvas, size = 300) {
     const scale = window.devicePixelRatio;
@@ -102,7 +102,7 @@ function initCanvasCtx (canvas, size = 300) {
 
 开发者可以通过Alins提供的接口来自定义抽象层，首先通过实现 IElement 接口来自定义UI元素类，然后通过调用`defineRenderer`方法来自定义抽象层和渲染器。
 
-<CodeBox :iframe='true' :height='50'></CodeBox>
+<CodeBox :iframe='true' :height='60'></CodeBox>
 
 ```jsx
 import { IElement, defineRenderer, ILifeListener } from 'alins';
@@ -226,7 +226,7 @@ function start(){
     let v = 0;
     const v2 = v * 2;
 
-    <div $$Root>
+    <div $mount='#Root'>
         value = {v}
         <div>value * 2 = {v2}</div>
     </div>;
@@ -241,7 +241,7 @@ function start(){
     loopRender();
 }
 
-<button onclick={start} $$App>Start</button>
+<button onclick={start} $mount='#App'>Start</button>
 ```
 
 ## 4. Nodejs 中使用

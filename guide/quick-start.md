@@ -18,11 +18,13 @@ npm run dev
 
 ## 1.2 使用Web编译器
 
+<CodeBox :iframe='true' :height='60' :html='true' :pure='true'/>
+
 ```html
 <script src='https://unpkg.com/alins-compiler-web'></script>
 <script type='text/alins'> 
     let count = 1;
-    <button onclick={count++} $$body>
+    <button onclick={count++} $mount='body'>
         count is {count}
     </button>;
 </script>

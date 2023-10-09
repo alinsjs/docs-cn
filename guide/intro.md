@@ -30,17 +30,38 @@ let count = 1;
 
 除此之外，Alins未采用vdom，另外得益于细粒度的响应式绑定，alins可以以最小的成本最细粒度的变更引用了该响应式数据的dom元素。
 
-上面的例子中，如果你不喜欢 `$mount` 属性，也可以使用 appendChild 来完成挂载节点，只不过会多书写一点代码：
+## 2. 纯粹的JS和JSX
+
+上面的例子中，如果你不喜欢 `$mount` 和 `{count ++}` 属性，也可以使用 appendChild 来完成挂载节点，使用函数作为事件的值，只不过会多书写一点代码：
 
 <CodeBox />
 
 ```js
 let count = 1;
 document.getElementById('App').appendChild(
-  <button onclick={count++}>
+  <button onclick={()=>count++}>
       count is {count}
   </button>
 );
+```
+
+## 3. 无编译直接运行
+
+Alins生态提供了 [alins-standalone](../ecosystem/standalone) 来进行浏览器环境的直接使用 Alins 的核心运行时功能，通过一些 API 的调用，可以实现完整的Alins应用功能，但是无法使用jsx语法。
+
+不同于 Alins [Web编译器](../ecosystem/web-compiler)，alins-standalone可以直接用于生产环境，
+
+<CodeBox :iframe='true' :height='60' :html='true' :standalone='true'/>
+
+```js
+import { ref, computed, Dom, join } from 'alins-standalone';
+
+const count = ref(1);
+const countAdd1 = computed(() => count.v + 1);
+Dom.button({
+    $mount: '#App',
+    onclick: () => count.v++,
+}, join`count is ${count}; countAdd1 is ${countAdd1}`);
 ```
 
 ::: tip

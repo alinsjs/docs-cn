@@ -18,7 +18,7 @@
 
 ```jsx
 let value = 'Hello';
-<div $$App>
+<div $mount='#App'>
     <input value={value} /><br/>
     <textarea value={value}></textarea>
     <div>Content = "{value}"</div>
@@ -33,7 +33,7 @@ let value = 'Hello';
 
 ```jsx
 let a = 1, b = 2;
-<div $$App>
+<div $mount='#App'>
     <div>
         <input type='number' value={a}/>
         <input type='range' value={a}/>
@@ -52,7 +52,7 @@ let a = 1, b = 2;
 
 ```jsx
 let selected = 'Apple';
-<div $$App>
+<div $mount='#App'>
     <select value={selected}>
         <option>Apple</option>
         <option>Banana</option>
@@ -70,7 +70,7 @@ let selected = 'Apple';
 
 ```jsx
 let selected = true;
-<div $$App>
+<div $mount='#App'>
     <select value={selected}>
         <option>true</option>
         <option>false</option>
@@ -87,7 +87,7 @@ let selected = true;
 
 ```js
 let checked = false;
-<div $$App>
+<div $mount='#App'>
     <input type='checkbox' checked={checked} />
     <div> checked = {checked}; type = {typeof checked}</div>
 </div>
@@ -105,7 +105,7 @@ let checked = false;
 
 ```jsx
 let a = 1, b = '';
-<div $$App>
+<div $mount='#App'>
     <input value={a}/>
     <input value:number={b}/>
     <div> a + b = {a + b}</div>
@@ -118,7 +118,7 @@ let a = 1, b = '';
 
 ```jsx
 let selected = 'true';
-<div $$App>
+<div $mount='#App'>
     <select value:boolean={selected}>
         <option>true</option>
         <option>false</option>

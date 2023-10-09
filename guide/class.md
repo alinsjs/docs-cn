@@ -9,7 +9,7 @@ HTML类名在Alins中与普通属性使用有一定差异。
 
 ## 1. 使用字符串
 
-使用字符串作为class属性值时，去普通属性值并无多大差异：
+使用字符串作为class属性值时，与普通属性值并无多大差异：
 
 <CodeBox/>
 
@@ -18,7 +18,7 @@ function logClass(e){
     console.log(e.target.className);
 }
 let className = 'v1 v2';
-<div $$App>
+<div $mount='#App'>
     <button class='a b' onclick={logClass}>静态字符串</button>
     <button class={className} onclick={logClass}>字符串变量</button>
     <button class={`a ${className}`} onclick={logClass}>字符串模版</button>
@@ -40,7 +40,7 @@ const classObject = {
 function logClass(e){
     console.log(e.target.className);
 }
-<button $$App 
+<button $mount='#App' 
     class={classObject}
     onclick={logClass}>
     Log Class
@@ -59,7 +59,7 @@ let a2Count = 2;
 function logClass(e){
     console.log(e.target.className);
 }
-<button $$App 
+<button $mount='#App' 
     class={{
         a: true,
         a1: a1Flag,
@@ -80,7 +80,7 @@ function logClass(e){
 function logClass(e){
     console.log(e.target.className);
 }
-<button $$App
+<button $mount='#App'
     class='a1 a2' 
     class:a3={true}
     class:a4={2 < 1}

@@ -9,13 +9,13 @@ style属性在Alins中与普通属性使用有一定差异。
 
 ## 1. 使用字符串
 
-使用字符串作为style属性值时，去普通属性值并无多大差异：
+使用字符串作为style属性值时，与普通属性值并无多大差异：
 
 <CodeBox/>
 
 ```jsx
 let style = 'color: #4f4';
-<div $$App>
+<div $mount='#App'>
     <div style='color: #f44'>静态字符串</div>
     <div style={style}>字符串变量</div>
     <div style={`font-size:20px;${style}`}>字符串模版</div>
@@ -34,8 +34,8 @@ const style = {
     fontSize: 20, // 此处单位默认为px
     fontWeight: 'bold',
 };
-<div $$App>
-    <div style={style}>Alins is COOL!</div>
+<div $mount='#App'>
+    <div style={style}>Alins is AWESOME!</div>
 </div>;
 ```
 
@@ -49,12 +49,12 @@ style属性值也可以可以使用js表达式
 let redNumber = 255;
 let fontSize = 20;
 
-<div $$App>
+<div $mount='#App'>
     <div style={{
         color: `rgb(${redNumber}, 50, 50)`,
         fontSize,
         fontWeight: `bold`,
-    }}>Alins is COOL!</div>
+    }}>Alins is AWESOME!</div>
 </div>;
 ```
 
@@ -65,10 +65,10 @@ let fontSize = 20;
 <CodeBox/>
 
 ```jsx
-<div $$App
+<div $mount='#App'
     style='color: #f44;' 
     style:fontSize={20}
     style:fontWeight='bold'>
-    Alins is COOL!
+    Alins is AWESOME!
 </div>
 ```

@@ -1,3 +1,8 @@
+<!--
+ * @Author: chenzhongsheng
+ * @Date: 2023-09-17 16:33:22
+ * @Description: Coding something
+-->
 # 生命周期
 
 Alins 元素有以下四个声明周期属性，$created，$appended，$mounted，$removed。生命周期属性值只接受函数。
@@ -12,7 +17,7 @@ $created 表示dom元素刚刚被创建，此时dom元素的属性还没有被�
 function created(dom) {
     console.log(dom.outerHTML, `parent=${dom.parentElement}`);
 }
-<div $created={created} name='hello' $$App>Hello</div>;
+<div $created={created} name='hello' $mount='#App'>Hello</div>;
 ```
 
 ## 2. $appended
@@ -29,7 +34,7 @@ function appended(dom) {
         `parent.parent=${dom.parentElement.parentElement}`
     );
 }
-<div $$App>
+<div $mount='#App'>
     <div $appended={appended} name='hello'>Hello</div>
 </div>
 ```
@@ -48,7 +53,7 @@ function mounted(dom) {
         `parent.parent=${dom.parentElement.parentElement.tagName}`
     );
 }
-<div $$App>
+<div $mount='#App'>
     <div $mounted={mounted} name='hello'>Hello</div>
 </div>
 ```
@@ -69,7 +74,7 @@ function mounted(dom) {
     );
     return dom => {console.log(`Removed: ${dom.innerHTML}`)}
 }
-<div $$App>
+<div $mount='#App'>
     <div $ref={ref} $mounted={mounted} name='hello'>Hello</div>
     <button onclick={ref.remove()}>Remove Hello</button>
 </div>
@@ -86,8 +91,12 @@ let ref;
 function removed(dom) {
     console.log(`Removed: ${dom.innerHTML}`);
 }
-<div $$App>
+<div $mount='#App'>
     <div $ref={ref} $removed={removed} name='hello'>Hello</div>
     <button onclick={ref.remove()}>Remove Hello</button>
 </div>
 ```
+
+## 5. 组件内使用
+
+组件内可以借助编译规则脱离JSX属性、在js逻辑中声明生命周期函数，具体使用请见 [编译规则](./rule.html) 章第 7 小节
