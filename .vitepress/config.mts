@@ -9,7 +9,7 @@ import { defineConfig } from 'vitepress'
 
 const isProd = process.env.NODE_ENV === 'production';
 
-const version = '0.0.35'
+const version = '0.0.36';
 
 export default defineConfig({
   title: `Alins Docs(v${version})`,
@@ -73,16 +73,16 @@ export default defineConfig({
               link: '/guide/intro',
             },
             {
-              text: '对比',
-              link: '/guide/compare',
-            },
-            {
               text: '快速上手',
               link: '/guide/quick-start',
             },
             {
               text: '概念',
               link: '/guide/concept',
+            },
+            {
+              text: '对比',
+              link: '/guide/compare',
             },
           ]
         },
@@ -158,6 +158,14 @@ export default defineConfig({
             {
               text: '工具链接',
               link: '/guide/libs',
+            },
+            {
+              text: 'Typescript案例',
+              link: '/guide/ts',
+            },
+            {
+              text: 'TODO-LIST Demo',
+              link: '/guide/todo',
             },
           ]
         },

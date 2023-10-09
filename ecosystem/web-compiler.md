@@ -39,7 +39,7 @@ Web编译器可以识别三种 type, `text/alins`, `text/babel`, `text/jsx`, 将
 
 ## 3. import属性
 
-可以使用 import 属性置顶import语句的引入方式，可选值有:
+可以使用 import 属性指定 alins 的引入方式，可选值有:
 
 1. esm: 表示使用 import 语句引入alins
 2. cjs: 表示使用 require 方法引入alins

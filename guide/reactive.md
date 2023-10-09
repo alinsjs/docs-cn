@@ -53,7 +53,24 @@ function onclick(e){
 </button>
 ```
 
-## 4. 属性是否可见
+注：前面章节中提到的 `$attributes` 属性也完全支持响应式数据
+
+<CodeBox/>
+
+```jsx
+let name = 'alins';
+function logAttributes(e){
+    name += '!';
+    console.log(e.target.outerHTML);
+}
+<button $mount='#App'
+    inner-attr="test"
+    $attributes={`name=${name}&value=framework`}
+    onclick={logAttributes} 
+>Click Me!</button>
+```
+
+## 4. 属性enable
 
 属性接受传入一个 value和enable属性的对象，我们可以通过enable属性来控制HTML属性是否生效，示例如下：
 

@@ -147,6 +147,25 @@ function logAttributes(e){
 >Click Me!</button>
 ```
 
+`$attributes` 同时也支持传入字符串类型，使用 name=value&name=value 的格式传入字符串
+
+<CodeBox/>
+
+```jsx
+let attrStr = 'name=TestName&value=TestValue';
+function logAttributes(e){
+    const attrs = e.target.attributes;
+    for(let item of attrs){
+        console.log(`${item.name}=${item.value}`);
+    }
+}
+<button $mount='#App'
+    inner-attr="test"
+    $attributes={attrStr}
+    onclick={logAttributes} 
+>Click Me!</button>
+```
+
 ## 7.动态节点
 
 由于Alins本质就是直接操作Dom，所以创建动态节点也非常直观，就是直接挂载JSX元素既可以，举一个例子
