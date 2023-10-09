@@ -122,8 +122,7 @@ onMounted(async ()=>{
         }
         resultCode = compileCodeResult.replace(/import *\{(.*?)\} *from *['"]alins((\-reactive)|(\-standalone))?['"]/g, 'const {$1} = window.Alins');
     }
-    console.log(resultCode)
-// console.log(resultCode);
+    // console.log(resultCode);
     const fn = props.iframe ? 
         null :
         new Function('console', resultCode.replace(/#App/g, `#${id.value}`).replace(/\.getElementById\(['"]App['"]\)/i, `.getElementById('${id.value}')`));
