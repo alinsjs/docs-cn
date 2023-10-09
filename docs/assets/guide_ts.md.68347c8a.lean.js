@@ -1,0 +1,1 @@
+import{_ as s,o as a,c as n,S as l}from"./chunks/framework.94c9b175.js";const d=JSON.parse('{"title":"Typescript 使用实践","description":"","frontmatter":{},"headers":[],"relativePath":"guide/ts.md","filePath":"guide/ts.md"}'),p={name:"guide/ts.md"},o=l("",11),e=[o];function t(c,r,F,D,y,i){return a(),n("div",null,e)}const A=s(p,[["render",t]]);export{d as __pageData,A as default};
