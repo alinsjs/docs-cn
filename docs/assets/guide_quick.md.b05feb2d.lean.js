@@ -1,0 +1,1 @@
+import{_ as e,o,c,S as l}from"./chunks/framework.94c9b175.js";const p=JSON.parse('{"title":"查询手册","description":"","frontmatter":{},"headers":[],"relativePath":"guide/quick.md","filePath":"guide/quick.md"}'),a={name:"guide/quick.md"},t=l("",4),i=[t];function r(d,s,n,h,m,f){return o(),c("div",null,i)}const _=e(a,[["render",r]]);export{p as __pageData,_ as default};

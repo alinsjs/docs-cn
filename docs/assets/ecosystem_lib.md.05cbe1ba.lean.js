@@ -1,0 +1,1 @@
+import{_ as l,o as i,c as e,S as a}from"./chunks/framework.94c9b175.js";const u=JSON.parse('{"title":"周边工具","description":"","frontmatter":{},"headers":[],"relativePath":"ecosystem/lib.md","filePath":"ecosystem/lib.md"}'),s={name:"ecosystem/lib.md"},t=a("",6),r=[t];function n(o,h,c,m,_,b){return i(),e("div",null,r)}const p=l(s,[["render",n]]);export{u as __pageData,p as default};

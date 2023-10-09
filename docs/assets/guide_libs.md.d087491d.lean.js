@@ -1,0 +1,1 @@
+import{_ as a,o as e,c as r,S as t}from"./chunks/framework.94c9b175.js";const g=JSON.parse('{"title":"工具链接","description":"","frontmatter":{},"headers":[],"relativePath":"guide/libs.md","filePath":"guide/libs.md"}'),l={name:"guide/libs.md"},i=t("",3),s=[i];function n(o,h,c,_,m,f){return e(),r("div",null,s)}const u=a(l,[["render",n]]);export{g as __pageData,u as default};
